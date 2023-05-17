@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@100;200;300;400;500;600;700;800&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+
+*{
+    font-family: 'Poppins';
+    margin: 0;
+    padding: 0;
+}
+
+
+.container{
+    width: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .content{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .content .card-sign-up{
+    width: 50%;
+    height: 100vh;
+    background-color: #232323;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .content .card-sign-up .content-sign-up{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3vh;
+}
+
+.container .content .card-sign-up .sign-up-informations{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    gap: 1.5vh;
+}
+
+.container .content .card-sign-up .sign-up-informations .informations-title{
+    font-weight: 600;
+    font-size: 2vw;
+    width: 45%;
+    text-transform: uppercase;
+    text-shadow: 0px 4px 4px rgba(64, 224, 208, 0.15);
+    color: #40E0D0;
+}
+.container .content .card-sign-up .sign-up-informations .informations-text{
+    width: 45%;
+    font-size: 1vw;
+    font-weight: 100;
+    color: #CFCFCF;
+}
+
+.container .content .card-sign-up .form-sign-up{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    gap: 3vh;
+}
+
+.container .content .card-sign-up .form-sign-up .form-item{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: white;
+} 
+
+.container .content .card-sign-up .form-sign-up .form-item .form-title{
+    font-size: 1vw;
+    font-weight: 200;
+    text-shadow: 0px 4px 4px rgba(64, 224, 208, 0.15);
+    color:  #40E0D0;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+} 
+
+.container .content .card-sign-up .form-sign-up .form-item .form-input{
+    margin-top: 1.5vh;
+    width: 89%;
+    height: 5vh;
+    background-color: #393939;
+    border: none;
+    border-radius: 0.5vw;
+    font-size: 0.8vw;
+    font-weight: 200;
+    color: #C3C3C3;
+    text-shadow: 0px 4px 4px rgba(0,0,0,0.245);
+    padding-left: 2.5vh;
+} 
+
+/* Estilização do placeholder*/
+.container .content .card-sign-up .form-sign-up .form-item .form-input::-webkit-input-placeholder{
+    font-size: 0.8vw;
+    font-weight: 200;
+    color: #C3C3C3;
+    text-shadow: 0px 4px 4px rgba(0,0,0,0.245);
+}
+
+.container .content .card-sign-up .form-sign-up .form-item .form-button{
+    cursor: pointer;
+    margin-top: 3vh;
+    width: 95%;
+    height: 5vh;
+    background-color: #37C1CA;
+    border: none;
+    border-radius: 0.5vw;
+    font-size: 0.85vw;
+    font-weight: 500;
+    color: white;
+    transition: all 0.3s ease-in-out;
+
+} 
+
+.container .content .card-sign-up .form-sign-up .form-item .form-button:hover{
+    background-color: #000;
+}
+
+.container .content .card-sign-up .redirect{
+    margin-top: 3vh;
+    width: 100%;
+    font-weight: 300;
+    font-size: 0.7vw;
+    letter-spacing: 0.02em;
+    color: rgba(255,255,255,0.9);
+    text-align: center;
+}
+
+.container .content .card-sign-up .redirect{
+    margin-top: 3vh;
+    width: 100%;
+    font-weight: 300;
+    font-size: 0.7vw;
+    letter-spacing: 0.02em;
+    color: rgba(255,255,255,0.9);
+    text-align: center;
+}
+
+.container .content .card-sign-up .redirect a{
+    color: #37C1CA;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 1s ease-in-out;
+}
+
+.container .content .card-sign-up .redirect a:hover{
+    text-decoration: underline;
+}
+
+.container .content .card-data-cooling{
+    width: 50%;
+    height: 100vh;
+    background-color: #37C1CA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .content .card-data-cooling .data-cooling-text{
+    width: 50%;
+    font-size: 5vw;
+    text-transform: uppercase;
+    line-height: 5vw;
+    color: white;
+    text-shadow: 0px 4px 4px rgba(0,0,0,0.24);
+}
+
+h1{
+    font-family: 'Nunito Sans';
+    font-weight: 700;
+}

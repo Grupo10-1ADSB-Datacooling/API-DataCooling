@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap%27');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+  
+}
+
+body {
+    font-size: 100;
+    background: linear-gradient(to bottom, #c2f1f1, #299296);
+    overflow: scroll;
+    height: 162vh;
+}
+
+header img {
+    margin-left: 3vh ;
+    margin-top: 1.5vh;
+    height: 2.5vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    height: 5vh;
+    background-color: rgba(55, 193, 202, 1); 
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3); 
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-left: 50%;
+    gap: 10vh;
+    font-family: Poppins;
+}
+
+header .exitIcon{
+    margin-right: 3vh;
+}
+
+main {
+    margin: 0;
+    padding: 0;
+}
+
+main .top {
+    height: 60vh;
+    background-color: #37C1CA;
+
+}
+
+h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.caixaSimulador {
+    display: flex;
+    height:40vh;
+    background-color:#E9F3FF;
+    ;
+    
+}

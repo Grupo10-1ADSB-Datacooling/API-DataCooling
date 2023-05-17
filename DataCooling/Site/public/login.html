@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style(3).CSS">
+    <script src="./scriptLogin.js"></script>
+    <title> Login - DataCooling</title>
+</head>
+<body>
+    <div class="container"> 
+        <div class="content">
+            <div class="card-sign-up">
+                <div class="content-sign-up">
+                    <div class="sign-up-informations">
+                        <h1 class="informations-title"> LOGIN </h1>
+                        <span class="informations-text">
+                            Seja bem-vindo, faça o login para ter acesso aos nossos serviços.
+                        </span>
+                    </div>
+                    <div class="form-sign-up">
+                        <div class="form-item">
+                            <h4 class="form-title" id="title_email"> Email </h4>
+                            <input class="form-input" id="ipt_email" type="email" placeholder="Insira o seu email">
+                        </div>
+                        <div class="form-item">
+                            <h4 class="form-title" id="title_senha"> Senha </h4>
+                            <input class="form-input" id="ipt_senha" type="password" placeholder="Insira a sua senha">
+                        </div>
+                        <!-- <div class="form-item">
+                            <span class="form-login-incorrect">
+                                Email ou Senha incorretos.
+                            </span>
+                        </div> -->
+                        <div class="form-item">
+                            <button class="form-button" id="btn_continuar" onclick="entrar()"> Entrar </button>
+                        </div>
+                    </div>
+                    <div class="redirect">
+                        Não possui uma conta? <a href="./cadastro.html"> Cadastre-se </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-data-cooling">
+                <h1 class="data-cooling-text"> 
+                    Data Cooling
+                </h1>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

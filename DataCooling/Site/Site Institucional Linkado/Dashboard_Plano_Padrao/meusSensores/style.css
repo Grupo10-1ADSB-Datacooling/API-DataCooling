@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap%27');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@100;200;300;400;500;600&display=swap%27');
+
+
+.container .content .informations{
+    margin: 0 auto;
+    margin-top: 5vh;
+    margin-bottom: 7vh;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 2vh;
+}
+
+.container .content .informations .informations-title{
+    color: #FF1A22;
+    font-family: 'Nunito Sans';
+    font-size: 2vw;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-shadow: 0px 4px 4px rgba(255, 26, 34, 0.15);
+    letter-spacing: 0.05rem;
+}
+
+.container .content .informations .informations-text{
+    color: rgba(255, 255, 255, 0.8);
+    width: 25vw;
+    font-size: 1vw;
+    font-weight: 400;
+}
+
+.container .content .informations .informations-text span{
+    font-weight: 700;
+}
+
+.container .content .sensors{
+    margin: 0 auto;
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
+    column-gap: 1vw;
+    row-gap: 10vh;
+}
+
+.container .content .sensors .card-sensor{
+    width: 28vw;
+    height: 23vh;
+    border-radius: 1vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container .content .sensors .card-sensor .informations-sensor{
+    margin-top: 4vh;
+    width: 80%;
+    height: 8vh;
+    display: grid;
+    row-gap: 2.5vh;
+}
+
+.container .content .sensors .card-sensor .informations-sensor .text-sensor{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container .content .sensors .card-sensor .informations-sensor .text-sensor h3{
+    font-family: 'Nunito Sans';
+    font-size: 1.05vw;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+}
+
+.container .content .sensors .card-sensor .informations-sensor .text-sensor .status-sensor{
+    font-size: 0.8vw;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+}
+
+.container .content .sensors .card-sensor .informations-sensor .setor-sensor{
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.85vw;
+    font-weight: 200;
+}
+
+.container .content .sensors .card-sensor .data-sensor{
+    width: 85%;
+    margin-top: 3vh;
+    display: flex;
+    justify-content: space-between;
+    padding: 1vh;
+    border-top: 1.5px solid rgba(255, 255, 255, 0.1);
+}
+
+.container .content .sensors .card-sensor .data-sensor .information-data{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1vh;
+}
+
+.container .content .sensors .card-sensor .data-sensor .information-data .icon-data{
+    background-color: rgba(255, 255, 255, 0.15);
+    width: 2.5vw;
+    height: 2.5vw;
+    border: none;
+    border-radius: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .content .sensors .card-sensor .data-sensor .information-data .icon-data img{
+    height: 2.8vh;
+}
+
+
+.container .content .sensors .card-sensor .data-sensor .text-data{
+    text-align: left;
+    line-height: 2.5vh;
+}
+
+.container .content .sensors .card-sensor .data-sensor .text-data h4{
+    text-align: left;
+    font-size: 0.8vw;
+    font-weight: 500;
+}
+
+.container .content .sensors .card-sensor .data-sensor .text-data span{
+    text-align: left;
+    font-size: 0.8vw;
+    font-weight: 700;
+}
+
+#above{
+    background-color: rgba(255, 26, 34, 0.4);
+    border: 2px solid rgba(255, 26, 34, 0.15);
+    box-shadow: 0px 7px 15px rgba(255, 26, 34, 0.15);
+}
+
+#text-above{
+    color: #FF1A22;
+}
+
+#ideal{
+    background-color: rgba(11, 205, 77, 0.4);
+    border: 2px solid rgba(11, 205, 77, 0.15);
+    box-shadow: 0px 7px 15px rgba(11, 205, 77, 0.15);
+}
+
+#text-ideal{
+    color: #0BCD4D;
+}
+
+#alert{
+    background-color: rgba(255, 255, 0, 0.4);
+    border: 2px solid rgba(255, 255, 0, 0.15);
+    box-shadow: 0px 7px 15px rgba(255, 255, 0, 0.15);
+}
+
+#text-alert{
+    color: #FFFF00;
+}
+
+#maintenance{
+    background-color: rgba(81, 81, 81, 0.4);
+    border: 2px solid rgba(81, 81, 81, 0.15);
+    box-shadow: 0px 7px 15px rgba(81, 81, 81, 0.15);
+    opacity: 0.75;
+}
+
+#maintenance .status-sensor, #maintenance .text-data span{
+    color: #7D7D7D;
+}

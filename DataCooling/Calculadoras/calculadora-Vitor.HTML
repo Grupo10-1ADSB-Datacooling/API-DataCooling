@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora financeiro</title>
+</head>
+<body>
+    Insira o seu faturamento mensal: <input id="ipt_financeiro" type="number"><br>
+    <br><button onclick="calcular()">Calcular perda</button>
+    <div id="div_mensagem"></div>
+    
+</body>
+</html>
+<script>
+    function calcular(){
+        var faturamento = Number(ipt_financeiro.value);
+        var perdames = faturamento;
+        var perdadia = faturamento / 31;
+        var perdahora = perdadia / 24;
+        var perdamin = perdahora / 60;
+
+        div_mensagem.innerHTML = `Sua perda por mes será de $${perdames.toFixed(2)}<br>Sua perda por dia será de $${perdadia}<br>Sua perda por hora será de $${perdahora.toFixed(2)}<br>Sua perda por minuto será de $${perdamin.toFixed(2)}`
+         
+    }
+
+
+</script>

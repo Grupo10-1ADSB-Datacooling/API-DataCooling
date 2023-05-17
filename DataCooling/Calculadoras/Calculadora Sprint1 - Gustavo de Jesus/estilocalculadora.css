@@ -1,0 +1,65 @@
+body{
+    margin: 0;
+    padding: 0;
+  
+    background-color: #f2efdc;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
+  .container{
+    width: 80%; /*100% da tela*/
+    margin: auto; /*margin automatico*/
+    display: flex;
+  }
+  .header{
+    border-bottom: 3px solid #00146d; /*linha azul*/
+    background-color: #ad9a87;
+  }
+  .header .container{
+    justify-content: space-between;/*so vamos usar 1 folha de estilo, para n ter duplicata de class*/
+    
+  }
+  
+  .header a{
+    text-decoration: none;
+    color: #00146d;
+    cursor: pointer;
+  }
+  .header a:hover{
+    background-image:linear-gradient(#ff0000,#555)
+  }
+  .agora{
+    font-weight: 800;/*maior é a expessura, força*/
+  
+  }
+  .navbar{
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;/*tira a listinha*/
+    color: #00146d;
+    
+  }
+  .titulo{
+    color: #00146d ; /*cor do texto AquaTech, chamado na div*/
+    width: fit-content;
+    font-weight: 800; /*diminuiu a expessura da letra*/
+  }
+  .h{
+    color: black;
+  }
+.buto{
+    width: 100px;
+    border:#f2efdc;
+    padding: 15px;
+    background-color: red;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 8px;
+    cursor:pointer;
+}
+.buto:hover{
+    background-image:linear-gradient(to right,rgba(0,30,172),rgba(80,19,195))
+}
+
+
