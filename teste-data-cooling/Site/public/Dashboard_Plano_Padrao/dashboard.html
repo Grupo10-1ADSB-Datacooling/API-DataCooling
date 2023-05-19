@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="./../assets/logo_datacooling.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/2780876011.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../funcoes.js"></script>
+    <script src="./js/charts.js"></script>
+    <script src="./js/loading.js" type="text/javascript"></script>
+    <script src="./js/scriptDashboard.js"></script>
+    <title> Dashboard - DataCooling</title>
+</head>
+<body onload="exibirLoader(1000, './../loading.css', './../assets/datacooling.png')"> 
+    <header>
+        <nav>
+            <div class="informations-profile">
+                <div class="img-profile">
+                    <img class="img-client" src="./../assets/kleber.png">
+                    <a href="./settings.html">
+                    <button class="icon-settings">
+                            <label class="icon">
+                                <i class="fa-solid fa-camera"></i>
+                            </label>
+                        </button>
+                    </a>
+                </div>
+                <h3 id="razaoSocial"> </h3>
+            </div>
+            <ul class="list-navegation">
+                <li class="list-item-now">
+                    <a href="#">
+                        Início
+                    </a>
+                </li>
+                <li class="list-item">
+                    <a href="./meusDados/meusDados.html">
+                        Meus dados
+                    </a>
+                </li>
+                <li class="list-item">
+                    <a href="./meusUsuarios/meusUsuarios.html">
+                        Meus usuários
+                    </a>
+                </li>
+                <li class="list-item">
+                    <a href="./meusSensores/meusSensores.html">
+                        Meus sensores
+                    </a>
+                </li>
+            </ul>
+            <label class="logout">
+                <a href="./../Login/index.HTML">
+                    <button class="logout-button" onclick="sairDaConta()">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        Sair da conta
+                    </button>
+                </a>
+            </label>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="nav">
+            <div class="logo">
+                <a href="./../Tela-Inicial/index.HTML">
+                    <img class="img-logo" src="./../assets/datacooling.png">
+                </a>
+            </div>
+        </div>
+        <div class="content">
+            <div class="client-informations">
+                <div class="status-datacenter">
+                    <h4 id="titleStatus"></h4>
+                    <img class="img-status" src="./../assets/dadinho_com_grafico.png">
+                </div>
+                <div class="selects">
+                    <div class="selects-content">
+                        <h4> Selecione seus sensores </h4>
+                        <select class="select" id="select_sensor">
+                            <!-- <option value="null"> Selecione </option> -->
+
+                            <!-- <option value="Todos"> Todos os setores </option> -->
+                        </select>
+                    </div>
+                    <div class="selects-content">
+                        <h4> Selecione a data </h4>
+                        <!-- <input type="date" id="ipt_data"> -->
+                        <select class="select" id="select_data">
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard"></div>
+        </div>
+    </div>
+</body>
+</html>

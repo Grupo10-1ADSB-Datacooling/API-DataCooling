@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1 class="titulo">DATACOOLING</h1>
+            <ul class="navbar">
+                <li class="agora"> Inicial</li>
+                <li> <a href="">Simulador</a>
+                </li>
+                <li><a href=""> Login</a>
+                </li>
+                <li><a href=""> Cadastro</a>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <h1 class="hoje"> SIMULADOR FINANCEIRO </h1>
+    <div id="div_perdinhaP" class="hoje
+    "></div><br>
+
+    <h3 class="hoje"> FATURAMENTO MENSAL DA EMPRESA</h3><br>
+    <input type="number" id="in_mensal" class="hoje
+    "><br>
+
+
+    <button onclick="calcular()" class="hoje
+    "> CARCULAR PERDA </button><br>
+
+    <div id="div_perda" class="hoje"></div><br>
+    <img src="https://th.bing.com/th/id/OIP.kvVyaYX0PIUF4FboEq0N3gHaD4?w=343&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7" alt="" class="lateral">
+
+</body>
+</html>
+<script>
+    function calcular() {
+        var minutinho = Number(9000)
+        var faturamento = Number(in_mensal.value)
+        var horas = Number(minutinho * 60)
+        var dia = Number(minutinho * 1440)
+        var mes = Number(minutinho * 43800)
+        var perdas = Number(faturamento - minutinho)
+        var perdinha = Number(faturamento - horas)
+        var perdinhas = Number(faturamento - dia)
+        var perdona = Number(faturamento - mes)
+
+
+
+
+        div_perdinhaP.innerHTML = ` <br>Voce perdera em 1 minuto ${minutinho} dolares`
+        div_perdinhaP.innerHTML += ` <br>voce perdera em uma hora ${horas} dolares`
+        div_perdinhaP.innerHTML += ` <br>voce perdera em um dia ${dia} dolares`
+        div_perdinhaP.innerHTML += ` <br>voce perdera em um mes ${mes} dolares <br>`
+
+
+        if (faturamento > 0) {
+            div_perda.innerHTML = `<br> seu faturamento sera de ${perdas.toFixed(2)} se ficar desligado por <b>1 minuto </b>`
+            div_perda.innerHTML += `<br> seu faturamento sera de ${perdinha.toFixed(2)} se ficar desligado por <b>1 hora </b>`
+            div_perda.innerHTML += `<br> seu faturamento sera de ${perdinhas.toFixed(2)} se ficar desligado por <b>1 dia </b>`
+            div_perda.innerHTML += `<br> seu faturamento sera de ${perdona.toFixed(2)} se ficar desligado por <b>1 mes </b>`
+        }
+    }
+
+</script>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./../style.css">
+    <link rel="shortcut icon" href="./../../assets/logo_datacooling.png" type="image/x-icon">
+    <title> Cadastro de usuários - DataCooling</title>
+    <script src="https://kit.fontawesome.com/2780876011.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <script src="./../js/loading.js"></script>
+    <script src="./script.js"></script>
+</head>
+<body onload="exibirLoader(500, './../../loading.css', './../../assets/datacooling.png')">
+    <header>
+        <nav>
+            <div class="informations-profile">
+                <div class="img-profile">
+                    <img class="img-client" src="./../../assets/kleber.png">
+                    <a href="#">
+                        <button class="icon-settings">
+                            <label class="icon">
+                                <i class="fa-solid fa-camera"></i>
+                            </label>
+                        </button>
+                    </a>
+                </div>
+                <h3 id="razaoSocial"> </h3>
+            </div>
+            <ul class="list-navegation">
+                <li class="list-item">
+                    <a href="./../dashboard.html">
+                        Início
+                    </a>
+                </li>
+                <li class="list-item">
+                    <a href="./../meusDados/meusDados.html">
+                        Meus dados
+                    </a>
+                </li>
+                <li class="list-item-now">
+                    <a href="./meusUsuarios.html">
+                        Meus usuários
+                    </a>
+                </li>
+                <li class="list-item">
+                    <a href="./../meusSensores/meusSensores.html">
+                        Meus sensores
+                    </a>
+                </li>
+            </ul>
+            <label class="logout">
+                <a href="./../../Login/index.HTML">
+                    <button class="logout-button" onclick="sairDaConta()">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        Sair da conta
+                    </button>
+                </a>
+            </label>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="nav">
+            <div class="logo">
+                <a href="./../Tela-Inicial/index.HTML">
+                    <img class="img-logo" src="./../../assets/datacooling.png">
+                </a>
+            </div>
+            <label class="icon" onclick="history.back()">
+                <i class="fa-solid fa-arrow-left"></i>
+            </label>
+        </div>
+        <div class="content">
+            <div class="user-registration">
+                <div class="content-user-registration">
+                    <div class="informations-user-registration">
+                        <h1 class="informations-user-registration-title"> Adicionar usuário </h1>
+                        <span class="informations-user-registration-text">
+                            Por ter a assinatura Padrão, você pode cadastrar até 4 usuários.
+                        </span>
+                    </div>
+                    <div class="card-user-registration">
+                        <div class="form-user-registration">
+                            <div class="form-item">
+                                <h4 class="form-title"> Nome </h4>
+                                <input class="form-input" id="ipt_nome" placeholder="Insira o nome do usuário">
+                            </div>
+                            <div class="form-item">
+                                <h4 class="form-title"> Sobrenome </h4>
+                                <input class="form-input" id="ipt_sobrenome"
+                                    placeholder="Insira o sobrenome do usuário">
+                            </div>
+                            <div class="form-item">
+                                <h4 class="form-title"> Email </h4>
+                                <input class="form-input" id="ipt_email" type="email"
+                                    placeholder="Insira o email do usuário">
+                            </div>
+                            <div class="form-item">
+                                <h4 class="form-title"> Senha </h4>
+                                <input class="form-input" id="ipt_senha" type="password"
+                                    placeholder="Insira a senha do usuário">
+                            </div>
+                            <div class="form-item">
+                                <h4 class="form-title"> Cargo </h4>
+                                <select class="form-select" id="select_cargo">
+                                    <option value="Gerente de TI"> Gerente de TI </option>
+                                    <option value="Subgerente de TI"> Subgerente de TI </option>
+                                    <option value="Arquiteta de TI"> Arquiteta de TI </option>
+                                </select>
+                            </div>
+                            <div class="form-item">
+                                <button class="form-button" id="btn_cadastrar" onclick="cadastrarUsuario()"> Cadastrar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-dadinho">
+                    <img class="img-dadinho" src="./../../assets/dadinho_adicionar_usuario.png">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
