@@ -8,7 +8,9 @@ function exibirConteudo(){
     loading.style.display = 'none';
     header.style.display = 'flex';
     container.style.display = 'flex';
-    window.onload = validarSessao(), listarSensores(), listarDataRegistro(), gerarGraficos();
+    window.onload = validarSessao(), listarSensores(), listarDataRegistro();
+    dashboard.onload = obterDadosGraficos();
+
 }
 
 function exibirLoader(delay, urlCss, urlImg){

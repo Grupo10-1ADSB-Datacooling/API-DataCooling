@@ -3,6 +3,7 @@ function exibirConteudo(){
     var header = document.querySelector('header');
     var container = document.querySelector('.container');
     var dashboard = document.querySelector('.dashboard');
+    console.log(dashboard);
     var dadosUsuario = document.querySelector('.data-user');
 
     loading.style.display = 'none';
