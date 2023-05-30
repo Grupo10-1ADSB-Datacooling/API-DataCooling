@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./../assets/logo_datacooling.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kit.fontawesome.com/2780876011.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <script src="./../funcoes.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="./js/loading.js"></script>
+    <title> Meus Sensores - DataCooling </title>
+</head>
+
+<body onload="exibirLoader(1200, './../loading.css', './../assets/datacooling.png')">
+    <header>
+        <nav>
+            <div class="informations-profile">
+                <div class="img-profile">
+                    <img class="img-client" src="./../assets/kleber.png">
+                    <a href="#">
+                        <button class="icon-settings">
+                            <label class="icon">
+                                <i class="fa-solid fa-camera"></i>
+                            </label>
+                        </button>
+                    </a>
+                </div>
+                <h3 id="razaoSocial"> </h3>
+            </div>
+            <ul class="list-navegation">
+                <li class="list-item-now">
+                    <a href="#">
+                        Início
+                    </a>
+                </li>
+                <li class="list-item">
+                    <a href="./dashboard/dashboard.html">
+                        Meus gráficos
+                    </a>
+                </li>
+                <li class="list-item">
+                    <a href="./meusDados/meusDados.html">
+                        Meus dados
+                    </a>
+                </li>
+                <li class="list-item">
+                    <a href="./meusUsuarios/meusUsuarios.html">
+                        Meus usuários
+                    </a>
+                </li>
+            </ul>
+            <label class="logout">
+                <button class="logout-button" onclick="sairDaConta()">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    Sair da conta
+                </button>
+            </label>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="nav">
+            <div class="logo">
+                <a href="./../index.html">
+                    <img class="img-logo" src="./../assets/datacooling.png">
+                </a>
+            </div>
+        </div>
+        <div id="div_alerta">
+        </div>
+        <div class="content">
+            <!-- <div class="informations"> -->
+                <!-- <h1 class="informations-title"> Alerta! </h1> -->
+                <!-- <span class="informations-text"> -->
+                    <!-- <span> Setor A </span> e <span> Setor C </span> estão com a temperatura <span> acima </span> do
+                    <span> ideal. </span> -->
+                    <!-- Seu datacenter está com problema de temperatura e/ou umidade. -->
+                    <!-- <span> Setor A </span> e <span> Setor C </span> estão com a umidade e/ou a temperatura <span> acima </span> ou <span> abaixo </span> do
+                    <span> ideal. </span> -->
+                    <!-- <span> Setor A </span> e <span> Setor B</span> estão com problemas de temperatura e/ou umidade. -->
+                    <!-- <span> Setor A </span> e <span> Setor C </span> estão com a temperatura e/ou umidade <span> fora </span> do
+                    <span> ideal. </span> -->
+                <!-- </span> -->
+            <!-- </div> -->
+            <div class="analytics">
+                <div class="content">
+                    <!-- <h3> Alertas de Temperatura: </h3> -->
+                    <ul class="list">
+                        <li id="critico">
+                            <div class="bolinha"></div>
+                            <div class="texts">
+                                <h4> Crítico</h4>
+                                <h5> <= 18°C </h5>
+                            </div>
+                        </li>
+                        <li id="alerta">
+                            <div class="bolinha"></div>
+                            <div class="texts">
+                                <h4> Alerta </h4>
+                                <h5> <= 21.5°C </h5>
+                                </div>
+                        </li>
+                        <li id="ideal">
+                            <div class="bolinha"></div>
+                            <div class="texts">
+                                <h4> Ideal </h4>
+                                <h5> >= 23°C </h5>
+                            </div>
+                        </li>
+                        <li id="ideal">
+                            <div class="bolinha"></div>
+                            <div class="texts">
+                                <h4> Ideal </h4>
+                                <h5> <= 27°C </h5>
+                            </div>
+                        </li>
+                        <li id="alerta">
+                            <div class="bolinha"></div>
+                            <div class="texts">
+                                <h4> Alerta </h4>
+                                <h5> <= 27.5°C </h5>
+                                </div>
+                        </li>
+                        <li id="critico">
+                            <div class="bolinha"></div>
+                            <div class="texts">
+                                <h4> Crítico</h4>
+                                <h5> >= 30°C </h5>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="content">
+                    <!-- <h3> Alertas de Umidade: </h3> -->
+                    <ul class="list">
+                        <li id="critico">
+                            <div class="bolinha"></div>
+                            <div class="texts">
+                                <h4> Crítico</h4>
+                                <h5> <= 35% </h5>
+                            </div>
+                        </li>
+                        <li id="alerta">
+                            <div class="bolinha"></div>
+                            <div class="texts">
+                                <h4> Alerta </h4>
+                                <h5> <= 43% </h5>
+                                </div>
+                        </li>
+                        <li id="ideal">
+                            <div class="bolinha"></div>
+                            <div class="texts">
+                                <h4> Ideal </h4>
+                                <h5> >= 45% </h5>
+                            </div>
+                        </li>
+                        <li id="ideal">
+                            <div class="bolinha"></div>
+                            <div class="texts">
+                                <h4> Ideal </h4>
+                                <h5> <= 55% </h5>
+                            </div>
+                        </li>
+                        <li id="alerta">
+                            <div class="bolinha"></div>
+                            <div class="texts">
+                                <h4> Alerta </h4>
+                                <h5> <= 56.5% </h5>
+                                </div>
+                        </li>
+                        <li id="critico">
+                            <div class="bolinha"></div>
+                            <div class="texts">
+                                <h4> Crítico</h4>
+                                <h5> >= 60% </h5>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sensors" id="div_sensores">
+                
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>

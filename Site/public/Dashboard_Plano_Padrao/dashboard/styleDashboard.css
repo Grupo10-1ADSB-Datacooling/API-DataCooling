@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap%27');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@100;200;300;400;500;600&display=swap%27');
+
+
+
+:root{
+    --corIdeal: #0BCD4D;
+    --corAlerta: #eaea4d;
+    --corCritico: #FF3C3C;
+    --corManutencao: #7D7D7D;
+    --corIdeal-25-contraste: rgba(11, 205, 77, 0.25);
+    --corAlerta-25-contraste: rgba(234, 234, 77, 0.25);
+    --corCritico-25-contraste: rgba(255, 60, 60, 0.25);
+    --corManutencao-25-contraste: rgba(125, 125, 125, 0.25);
+}
+
+.container .content .client-informations{
+    width: 100%;
+    display: flex;
+}
+
+.container .content .client-informations .status-datacenter{
+    width: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .content .client-informations .status-datacenter h4{
+    font-size: 1.3vw;
+    font-family: 'Nunito Sans';
+    color: #40E0D0;
+    width: 10vw;
+}
+
+.container .content .client-informations .status-datacenter .img-status{
+    width: 12vw;
+}
+
+.container .content .client-informations .selects{
+    width: 100%;
+    height: 25vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.container .content .client-informations .selects .selects-content h4{
+    color: #40E0D0;
+}
+
+.container .content .client-informations .selects .selects-content input, .select{
+    position: absolute;
+    background-color: #161616;
+    color: #C3C3C3;
+    width: 13vw;
+    height: 5vh;
+    border: 1px solid rgba(255, 255, 255 , 0.05);
+    border-radius: 0.5vw;
+    margin-top: 2vh;
+    padding-left: 1.5vh;
+    font-weight: 200;
+    letter-spacing: 0.05rem;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 1);
+}
+
+.container .content .client-informations .selects .selects-content input[type="date"]:focus{
+    background: #161616 !important;
+    border-radius: 0.5vw;
+}
+
+.container .content .client-informations .selects .selects-content input[type="date"]::-webkit-calendar-picker-indicator{
+    padding: 1vw;
+    cursor: pointer;
+    filter: invert(100) brightness(100%) sepia(100%) saturate(100%) hue-rotate(240deg);
+}
+
+.container .content .client-informations .selects .selects-content select:visited{
+    border: none;
+}
+
+.container .content .dashboard{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container .content .dashboard .line{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.container .content .dashboard .line .line-chart .title h4, .container .content .dashboard .donut .donut-chart .title h4{
+    color: rgba(255, 255, 255 , 0.95);
+    font-weight: 400;
+}
+
+.container .content .dashboard .line .line-chart .chart, .container .content .dashboard .donut .donut-chart .chart{
+    margin-top: 3vh;
+    width: 35vw;
+    height: auto;
+    padding: 15px;
+    background-color: #161616;
+    border: 1px solid rgba(255, 255, 255 , 0.05);
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+    font-family: 'Poppins';
+}
+.container .content .dashboard .donut{
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.container .content .dashboard .donut .donut-chart .chart .chart-item{
+    width: 20vw;
+    margin: 0 auto;
+}
