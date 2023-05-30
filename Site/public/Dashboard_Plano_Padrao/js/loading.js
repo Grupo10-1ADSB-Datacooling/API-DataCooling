@@ -7,7 +7,7 @@ function exibirConteudo(){
     loading.style.display = 'none';
     header.style.display = 'flex';
     container.style.display = 'flex';
-    window.onload = validarSessao(), obterSensores();
+    window.onload = validarSessao();
     window.onload = setTimeout(listarDataRegistro, 100);
     setTimeout(obterDadosGraficos, 150)
 

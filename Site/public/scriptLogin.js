@@ -39,7 +39,7 @@ function entrar() {
                     sessionStorage.TEL_FIXO = json.telFixo;
                     sessionStorage.PLANO = json.nome;
 
-                    window.location = "Dashboard_Plano_Padrao/dashboard.html"
+                    window.location = "Dashboard_Plano_Padrao/index.html"
 
                     // setTimeout(function () {
                     //     window.location = "./dashboard/cards.html";

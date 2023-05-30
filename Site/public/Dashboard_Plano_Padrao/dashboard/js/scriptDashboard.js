@@ -24,12 +24,6 @@ function listarSensores() {
                 console.log(json);
                 console.log(JSON.stringify(json));
 
-                sessionStorage.ID_SENSOR = json.idSensor;
-                sessionStorage.TIPO_SENSOR = json.tipo;
-                sessionStorage.STATUS_SENSOR = json.statusSensor;
-                sessionStorage.NOME_SETOR = json.nomeSetor;
-
-
                 json.forEach(sensor => {
                     select_sensor.innerHTML += `<option value="${sensor.idSensor}" onclick="obterDadosGrafico(sensor.idSensor)"> Sensor ${sensor.idSensor} </option>`
                 })
