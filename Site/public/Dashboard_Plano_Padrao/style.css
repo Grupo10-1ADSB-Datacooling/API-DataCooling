@@ -29,8 +29,7 @@
 }
 
 body{
-    background: #232323;
-    background-color: rgba(0, 0, 0 , 0.95);
+    background: #0c0c0c;
     color: white;
     display: flex;
     justify-content: space-between;
@@ -54,6 +53,7 @@ body::-webkit-scrollbar-thumb{
 }
 
 #div_alerta{
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -62,14 +62,35 @@ body::-webkit-scrollbar-thumb{
 }
 
 .mensagem-alarme{
-    width: 25vw;
-    height: 15vh;
+    width: 30vw;
+    height: 20vh;
     display: flex;
     align-items: center;
     justify-content: center;
     border: none;
-    border-radius: 5px;
+    border-radius: 1vw;
     background-color: rgba(255, 255, 255 , 0.05);
+}
+
+.mensagem-alarme .informacao{
+    width: 85%;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 2vh;
+}
+
+.mensagem-alarme .informacao h4{
+    font-family: 'Nunito Sans';
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 400;
+}
+
+.mensagem-alarme .informacao .dados{
+    font-size: 1vw;
+}
+.mensagem-alarme .informacao .dados .captura{
+    font-weight: 600;
 }
 
 #loading{
@@ -296,32 +317,6 @@ header nav .logout .logout-button:hover{
     width: 90%;
 }
 
-#critico-cor{
-    color: var(--corCritico);
-}
-
-#div_card_critico{
-    background-color: var(--corCritico);
-    box-shadow: 0px 7px 4px var(--corCritico-25-contraste);
-}
-
-#ideal-cor{
-    color: var(--corIdeal);
-}
-
-#div_card_ideal{
-    background-color: var(--corIdeal);
-    box-shadow: 0px 7px 4px var(--corIdeal-25-contraste);
-}
-
-#alerta-cor{
-    color: var(--corAlerta);
-}
-#div_card_alerta{
-    background-color: var(--corAlerta);
-    box-shadow: 0px 7px 4px var(--corAlerta-25-contraste);
-}
-
 .analytics{
     width: 100%;
     display: flex;
@@ -422,6 +417,7 @@ header nav .logout .logout-button:hover{
     align-items: center;
     background-color: rgb(35, 35, 35);
     box-shadow: 0px 7px 4px rgba(35, 35, 35, 0.25);
+    transition: 0.6s all linear;
 }
 
 .container .content .sensors .card-sensor .informations-sensor{
@@ -451,6 +447,7 @@ header nav .logout .logout-button:hover{
     font-size: 0.8vw;
     font-weight: 600;
     letter-spacing: 0.03em;
+    transition: 0.5s all linear;
 }
 
 .container .content .sensors .card-sensor .informations-sensor .setor-sensor{
@@ -466,6 +463,7 @@ header nav .logout .logout-button:hover{
     justify-content: space-between;
     padding: 1vh;
     border-top: 1.5px solid rgba(255, 255, 255, 0.1);
+    
 }
 
 .container .content .sensors .card-sensor .data-sensor .information-data{
@@ -494,12 +492,14 @@ header nav .logout .logout-button:hover{
 .container .content .sensors .card-sensor .data-sensor .text-data{
     text-align: left;
     line-height: 2.5vh;
+    transition: 0.5s all linear;
 }
 
 .container .content .sensors .card-sensor .data-sensor .text-data h4{
     text-align: left;
     font-size: 0.8vw;
     font-weight: 500;
+    transition: 0.5s all linear;
 }
 
 .container .content .sensors .card-sensor .data-sensor .text-data span{
@@ -513,36 +513,6 @@ a{
     color: #fff;
 }
 
-.card_critico{
-    background-color: var(--corCritico-40-contraste);
-    border: 2px solid var(--corCritico-15-contraste);
-    box-shadow: 0px 7px 15px var(--corCritico-15-contraste);
-}
-
-.text_critico{
-    color: var(--corCritico);
-}
-
-.card_ideal{
-    background-color: var(--corIdeal-40-contraste);
-    border: 2px solid var(--corIdeal-15-contraste);
-    box-shadow: 0px 7px 15px var(--corIdeal-15-contraste);
-}
-
-.text_ideal{
-    color: var(--corIdeal);
-}
-
-.card_alerta{
-    background-color: var(--corAlerta-40-contraste);
-    border: 2px solid var(--corAlerta-15-contraste);
-    box-shadow: 0px 7px 15px var(--corAlerta-15-contraste);
-}
-
-.text_alerta{
-    color: var(--corAlerta);
-}
-
 .card_manutencao{
     background-color: var(--corManutencao-40-contraste);
     border: 2px solid var(--corManutencao-15-contraste);
@@ -550,6 +520,6 @@ a{
     opacity: 0.75;
 }
 
-.card_manutencao .status-sensor, #card_manutencao .text-data span{
+#card_manutencao .status-sensor, #card_manutencao .text-data span{
     color: var(--corManutencao);
 } 

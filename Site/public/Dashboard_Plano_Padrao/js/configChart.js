@@ -3,6 +3,10 @@
 let proximaAtualizacao;
 var alertasTemperatura = [];
 var alertasUmidade = [];
+var corIdeal =  'rgb(38, 202, 92)';
+var corAlerta =  'rgb(234, 234, 77)';
+var corCritico =  'rgb(255, 60, 60)';
+var corManutencao =  'rgb(125, 125, 125)';
 
 function obterDadosGraficos() {
     var dashboard = document.querySelector('.dashboard')
