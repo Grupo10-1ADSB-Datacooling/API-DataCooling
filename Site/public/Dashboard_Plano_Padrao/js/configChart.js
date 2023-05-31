@@ -173,7 +173,7 @@ function plotarGrafico(resposta, idSensor, dataRegistro) {
         configUmidade
     );
 
-    setTimeout(() => atualizarGrafico(idSensor, dataRegistro, dadosTemperatura, dadosUmidade, chartTemperatura, chartUmidade), 2000);
+    setTimeout(() => atualizarGrafico(idSensor, dadosTemperatura, dadosUmidade, chartTemperatura, chartUmidade), 2000);
 }
 
 
@@ -191,8 +191,6 @@ function atualizarGrafico(idSensor, dadosTemperatura, dadosUmidade, chartTempera
                 console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
                 console.log(`Dados atuais do gráfico:`);
                 console.log(dadosTemperatura, dadosUmidade);
-                alertar(novoRegistro, idSensor, novoRegistro[0].nome);
-
 
                 if (novoRegistro[0].momento_grafico == dadosTemperatura.labels[dadosTemperatura.labels.length - 1] && novoRegistro[0].momento_grafico == dadosUmidade.labels[dadosUmidade.labels.length - 1]) {
                     console.log("---------------------------------------------------------------")
@@ -237,167 +235,3 @@ function atualizarGrafico(idSensor, dadosTemperatura, dadosUmidade, chartTempera
         });
 
 }
-
-function alertar(resposta, idSensor, nomeSetor) {
-    var temp = resposta[0].temperatura;
-    var umid = resposta[0].umidade;
-    console.log(resposta);
-
-    console.log(idSensor  === resposta[0].fkSensor)
-    
-    var grauDeAvisoTemperatura ='';
-    var grauDeAvisoUmidade ='';
-
-    var limites_temperatura = {
-        critico_quente: 30,
-        alerta_quente: 28,
-        ideal: 23,
-        alerta_frio: 20,
-        critico_frio: 18
-    };
-    
-    var limites_umidade = {
-        critico_umido: 60,
-        alerta_umido: 57,
-        ideal: 45,
-        alerta_seco: 40,
-        critico_seco: 35
-    };
-
-    // Alertas de temperatura
-    var classe_temperatura = 'cor-alerta';
-
-    if(temp != null){
-        if (temp >= limites_temperatura.critico_quente) {
-            classe_temperatura = 'critico';
-            grauDeAvisoTemperatura = 'crítico muito quente';
-            grauDeAvisoCor = 'critico-cor';
-            exibirAlertaTemperatura(temp, idSensor, nomeSetor, grauDeAvisoTemperatura, grauDeAvisoCor)
-        }
-        else if (temp < limites_temperatura.critico_quente && temp >= limites_temperatura.alerta_quente) {
-            classe_temperatura = 'alerta';
-            grauDeAvisoTemperatura = 'alerta quente'
-            grauDeAvisoCor = 'alerta-quente'
-            exibirAlertaTemperatura(temp, idSensor, nomeSetor, grauDeAvisoTemperatura, grauDeAvisoCor)
-        }
-        else if (temp < limites_temperatura.alerta_quente && temp > limites_temperatura.alerta_frio) {
-            classe_temperatura = 'ideal';
-            removerAlerta(idSensor);
-        }
-        else if (temp <= limites_temperatura.alerta_frio && temp > limites_temperatura.critico_frio) {
-            classe_temperatura = 'alerta';
-            grauDeAvisoTemperatura = 'alerta frio'
-            grauDeAvisoCor = 'alerta-cor'
-            exibirAlertaTemperatura(temp, idSensor, nomeSetor, grauDeAvisoTemperatura, grauDeAvisoCor)
-        }
-        else if (temp <= limites_temperatura.critico_frio) {
-            classe_temperatura = 'critico';
-            grauDeAvisoTemperatura = 'critíco frio'
-            grauDeAvisoCor = 'critico-cor'
-            exibirAlertaTemperatura(temp, idSensor, nomeSetor, grauDeAvisoTemperatura, grauDeAvisoCor)
-        }
-    }
-    
-      // Alertas de umidade
-      var classe_umidade = 'cor-alerta'
-
-      if(umid != null){
-        if (umid >= limites_umidade.critico_umido) {
-            classe_umidade = 'critico';
-            grauDeAvisoUmidade = 'crítico muito úmido'
-            grauDeAvisoCor = 'critico-cor'
-            exibirAlertaUmidade(umid, idSensor, nomeSetor, grauDeAvisoUmidade, grauDeAvisoCor)
-        }
-        else if (umid < limites_umidade.critico_umido && umid >= limites_umidade.alerta_umido) {
-            classe_umidade = 'alerta';
-            grauDeAvisoUmidade = 'alerta úmido'
-            grauDeAvisoCor = 'alerta-cor'
-            exibirAlertaUmidade(umid, idSensor, nomeSetor, grauDeAvisoUmidade, grauDeAvisoCor)
-        }
-        else if (umid < limites_umidade.alerta_umido && umid > limites_umidade.alerta_seco) {
-            classe_umidade = 'ideal';
-            removerAlerta(idSensor);
-        }
-        else if (umid <= limites_umidade.alerta_seco && umid > limites_umidade.critico_seco) {
-            classe_umidade = 'alerta';
-            grauDeAvisoUmidade = 'alerta seco'
-            grauDeAvisoCor = 'alerta-cor'
-            exibirAlertaUmidade(umid, idSensor, nomeSetor , grauDeAvisoUmidade, grauDeAvisoCor)
-        }
-        else if (umid <= limites_umidade.critico_seco) {
-            classe_umidade = 'critico';
-            grauDeAvisoUmidade = 'crítico muito seco'
-            grauDeAvisoCor = 'critico-cor'
-            exibirAlertaUmidade(umid, idSensor, nomeSetor , grauDeAvisoUmidade, grauDeAvisoCor)
-        }
-    }
-}
-
-     // alerta Temperatura
-    function exibirAlertaTemperatura(temp, idSensor, nomeSetor, grauDeAvisoTemperatura, grauDeAvisoCor) {
-        var indice = alertasTemperatura.findIndex(item => item.idSensor == idSensor);
-            
-        if (indice >= 0) {
-            alertasTemperatura[indice] = {idSensor, nomeSetor, temp, grauDeAvisoTemperatura, grauDeAvisoCor }
-        } else {
-            alertasTemperatura.push({idSensor, nomeSetor, temp, grauDeAvisoTemperatura, grauDeAvisoCor });
-        }
-    
-        exibirCards();
-    
-    }
-
-    // alerta Umidade
-    function exibirAlertaUmidade(umid, idSensor, nomeSetor, grauDeAvisoUmidade, grauDeAvisoCor) {
-        var indice = alertasUmidade.findIndex(item => item.idSensor == idSensor);
-    
-        if (indice >= 0) {
-            alertasUmidade[indice] = { idSensor, nomeSetor, umid, grauDeAvisoUmidade, grauDeAvisoCor }
-        } else {
-            alertasUmidade.push({ idSensor, nomeSetor, umid, grauDeAvisoUmidade, grauDeAvisoCor });
-        }
-    
-        exibirCards();
-        
-    }
-
-    function removerAlerta(idSensor) {
-        alertasTemperatura = alertasTemperatura.filter(item => item.idSensor != idSensor);
-        alertasUmidade = alertasUmidade.filter(item => item.idSensor != idSensor);
-        exibirCards();
-    }
-     
-var b;
-
-    function exibirCards() {
-        div_alerta.innerHTML = '';
-    
-        for (var i = 0; i < alertasTemperatura.length; i++) {
-            var mensagemTemperatura = alertasTemperatura[i];
-            div_alerta.innerHTML += transformarEmDivTemperatura(mensagemTemperatura);
-        }
-
-        for (var i = 0; i < alertasUmidade.length; i++) {
-            var mensagemUmidade = alertasUmidade[i];
-            div_alerta.innerHTML += transformarEmDivUmidade(mensagemUmidade);
-        }
-        
-    }
-
-    function transformarEmDivTemperatura({ idSensor, nomeSetor, temp, grauDeAvisoTemperatura, grauDeAvisoCor }) {
-        return `<div class="mensagem-alarme">
-        <div class="informacao">
-        <div id="${grauDeAvisoCor}">&#12644;</div> 
-         <h3 id="${grauDeAvisoCor}">${nomeSetor} está em estado de ${grauDeAvisoTemperatura}!</h3>
-        <small>Temperatura: ${temp}°C  </small>   
-        </div>`;
-    }
-
-    function transformarEmDivUmidade({ idSensor, nomeSetor, umid, grauDeAvisoUmidade, grauDeAvisoCor }) {
-        return `<div class="mensagem-alarme">
-        <div class="informacao">
-        <div id="${grauDeAvisoCor}">&#12644;</div> 
-         <h3 id="${grauDeAvisoCor}">${nomeSetor} está em estado de ${grauDeAvisoUmidade}!</h3>
-        <small>Umidade: ${umid}%</small>   
-        </div>`;
-    }

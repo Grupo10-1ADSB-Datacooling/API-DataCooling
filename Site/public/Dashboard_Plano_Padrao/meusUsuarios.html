@@ -4,22 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleUsuarios.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="shortcut icon" href="./../../assets/logo_datacooling.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./../assets/logo_datacooling.png" type="image/x-icon">
     <script src="https://kit.fontawesome.com/2780876011.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-    <script src="./../js/loading.js"></script>
+    <script src="./js/loading.js"></script>
+    <script src="./../funcoes.js"></script>
     <script src="./script.js"></script>
     <title> Meus usuários - DataCooling </title>
 </head>
 
-<body onload="exibirLoader(300, './../../loading.css', './../../assets/datacooling.png'), exibirUsuarioCadastrado()">
+<body onload="exibirLoader(700, './../loading.css', './../assets/datacooling.png'), exibirUsuarioCadastrado()">
     <header id="header">
         <nav>
             <div class="informations-profile">
                 <div class="img-profile">
-                    <img class="img-client" src="./../../assets/kleber.png">
+                    <img class="img-client" src="./../assets/kleber.png">
                     <a href="./dadosUsuario.html">
                         <button class="icon-settings">
                             <label class="icon">
@@ -32,12 +33,17 @@
             </div>
             <ul class="list-navegation">
                 <li class="list-item">
-                    <a href="./../dashboard.html">
+                    <a href="./index.html">
                         Início
                     </a>
                 </li>
                 <li class="list-item">
-                    <a href="./../meusDados/meusDados.html">
+                    <a href="./dashboard.html">
+                        Meus gráficos
+                    </a>
+                </li>
+                <li class="list-item">
+                    <a href="./meusDados.html">
                         Meus dados
                     </a>
                 </li>
@@ -46,27 +52,20 @@
                         Meus usuários
                     </a>
                 </li>
-                <li class="list-item">
-                    <a href="./../meusSensores/meusSensores.html">
-                        Meus sensores
-                    </a>
-                </li>
             </ul>
             <label class="logout">
-                <a href="./../../Login/index.HTML">
-                    <button class="logout-button" onclick="sairDaConta()">
-                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                        Sair da conta
-                    </button>
-                </a>
+                <button class="logout-button" onclick="limparSessao()">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    Sair da conta
+                </button>
             </label>
         </nav>
     </header>
     <div class="container" id="container">
         <div class="nav">
             <div class="logo">
-                <a href="./../Tela-Inicial/index.HTML">
-                    <img class="img-logo" src="./../../assets/datacooling.png">
+                <a href="./../index.html">
+                    <img class="img-logo" src="./../assets/datacooling.png">
                 </a>
             </div>
         </div>
@@ -87,7 +86,7 @@
             <div class="users">
                 <div class="card-users">
                     <div class="profile">
-                        <img class="img-users" src="./../../assets/Bruno.png">
+                        <img class="img-users" src="./../assets/Bruno.png">
                         <div class="icon-pen" onclick="redirecionar('Bruno', 'Santos', 'bruno.santos@bambam.datacenter', 'bruno.bambam', 'Gerente de TI')">
                             <label class="icon">
                                 <i class="fa-solid fa-pen"></i>
@@ -101,7 +100,7 @@
                 </div>
                 <div class="card-users">
                     <div class="profile">
-                        <img class="img-users" src="./../../assets/Débora.png">
+                        <img class="img-users" src="./../assets/Débora.png">
                         <div class="icon-pen" onclick="redirecionar('Débora', 'Assis', 'debora.assis@bambam.datacenter', 'debora.bambam', 'Arquiteta de TI')">
                             <label class="icon">
                                 <i class="fa-solid fa-pen"></i>
@@ -115,7 +114,7 @@
                 </div>
                 <div class="card-users">
                     <div class="profile">
-                        <img class="img-users" src="./../../assets/Jeferson.png">
+                        <img class="img-users" src="./../assets/Jeferson.png">
                         <div class="icon-pen" onclick="redirecionar('Jeferson', 'Pereira', 'jeferson.pereira@bambam.datacenter', 'jeferson.bambam', 'Subgerente de TI')">
                             <label class="icon">
                                 <i class="fa-solid fa-pen"></i>

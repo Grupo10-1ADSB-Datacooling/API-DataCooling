@@ -36,7 +36,7 @@ function limparSessao() {
     // aguardar();
     sessionStorage.clear();
     // finalizarAguardar();
-    window.location = "../login.html";
+    setTimeout(() => {window.location = "../login.html"}, 1000);
 }
 
 // // carregamento (loading)

@@ -1,21 +1,20 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="copustyle.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./../style.css">
     <link rel="shortcut icon" href="./../../assets/logo_datacooling.png" type="image/x-icon">
+    <title> Cadastro de usuários - DataCooling</title>
     <script src="https://kit.fontawesome.com/2780876011.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="./../js/loading.js"></script>
-    <title> Editar Dados - DataCooling </title>
+    <script src="./js/loading.js"></script>
+    <script src="./js/scriptMeusDados.js"></script>
+    <script src="./js/script.js"></script>
 </head>
-
 <body onload="exibirLoader(500, './../../loading.css', './../../assets/datacooling.png')">
     <header>
         <nav>
@@ -38,13 +37,13 @@
                         Início
                     </a>
                 </li>
-                <li class="list-item-now">
-                    <a href="#">
+                <li class="list-item">
+                    <a href="./../meusDados/meusDados.html">
                         Meus dados
                     </a>
                 </li>
-                <li class="list-item">
-                    <a href="./../meusUsuarios/meusUsuarios.html">
+                <li class="list-item-now">
+                    <a href="./meusUsuarios.html">
                         Meus usuários
                     </a>
                 </li>
@@ -64,8 +63,6 @@
             </label>
         </nav>
     </header>
-
-
     <div class="container">
         <div class="nav">
             <div class="logo">
@@ -81,61 +78,53 @@
             <div class="user-registration">
                 <div class="content-user-registration">
                     <div class="informations-user-registration">
-                        <h1 class="informations-user-registration-title"> Dados do usuário</h1>
+                        <h1 class="informations-user-registration-title"> Adicionar usuário </h1>
                         <span class="informations-user-registration-text">
-                            Altere aqui os seus Dados
+                            Por ter a assinatura Padrão, você pode cadastrar até 4 usuários.
                         </span>
                     </div>
                     <div class="card-user-registration">
                         <div class="form-user-registration">
                             <div class="form-item">
-                                <h4 class="form-title"> Nome do Responsável: </h4>
+                                <h4 class="form-title"> Nome </h4>
                                 <input class="form-input" id="ipt_nome" placeholder="Insira o nome do usuário">
                             </div>
                             <div class="form-item">
-                                <h4 class="form-title"> Razão Social da Empresa: </h4>
-                                <input class="form-input" id="" placeholder="Insira a Razão Social da Empresa:">
-                            </div>
-                            <div class="form-item">
-                                <h4 class="form-title"> Plano </h4>
-                                <input class="form-input" id="" placeholder="Insira o Plano do usuário">
-                            </div>
-                            <div class="form-item">
-                                <h4 class="form-title"> CNPJ: </h4>
-                                <input class="form-input" id="" placeholder="Insira o CNPJ do usuário">
-                            </div>
-                            <div class="form-item">
-                                <h4 class="form-title"> CEP: </h4>
-                                <input class="form-input" id="" placeholder="Insira o CEP do usuário">
-                            </div>
-                            <div class="form-item">
-                                <h4 class="form-title"> Telefone Fixo: </h4>
-                                <input class="form-input" id="" placeholder="Insira o Telefone Fixo do usuário">
+                                <h4 class="form-title"> Sobrenome </h4>
+                                <input class="form-input" id="ipt_sobrenome"
+                                    placeholder="Insira o sobrenome do usuário">
                             </div>
                             <div class="form-item">
                                 <h4 class="form-title"> Email </h4>
-                                <input class="form-input" id="" placeholder="Insira o Telefone Fixo do usuário">
+                                <input class="form-input" id="ipt_email" type="email"
+                                    placeholder="Insira o email do usuário">
                             </div>
                             <div class="form-item">
-                                <h4 class="form-title"> Senha Antiga </h4>
-                                <input class="form-input" id="" type="password" placeholder="Senha Antiga">
+                                <h4 class="form-title"> Senha </h4>
+                                <input class="form-input" id="ipt_senha" type="password"
+                                    placeholder="Insira a senha do usuário">
                             </div>
                             <div class="form-item">
-                                <h4 class="form-title"> Senha Nova </h4>
-                                <input class="form-input" id="" type="password" placeholder="Senha Nova">
+                                <h4 class="form-title"> Cargo </h4>
+                                <select class="form-select" id="select_cargo">
+                                    <option value="Gerente de TI"> Gerente de TI </option>
+                                    <option value="Subgerente de TI"> Subgerente de TI </option>
+                                    <option value="Arquiteta de TI"> Arquiteta de TI </option>
+                                </select>
                             </div>
                             <div class="form-item">
-                                <h4 class="form-title"> Confirmar Senha nova </h4>
-                                <input class="form-input" id="" type="password" placeholder="Confirmar Senha Nova">
-                            </div>
-                            <div class="form-item">
-                                <button class="form-button" id="" onclick="AlterarDados()"> Salvar Informações
+                                <button class="form-button" id="btn_cadastrar" onclick="cadastrarUsuario()"> Cadastrar
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="card-dadinho">
+                    <img class="img-dadinho" src="./../../assets/dadinho_adicionar_usuario.png">
+                </div>
             </div>
         </div>
     </div>
 </body>
+
+</html>

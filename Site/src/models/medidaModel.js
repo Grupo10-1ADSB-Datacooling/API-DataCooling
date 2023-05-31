@@ -41,7 +41,7 @@ function buscarMedidasEmTempoReal(idSensor) {
                     order by dataHora desc`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select statusSensor, temperatura, umidade, dataHora, DATE_FORMAT(dataHora,'%H:%i:%s'), nome, fkSensor from Setor
+        instrucaoSql = `select statusSensor, temperatura, umidade, dataHora, DATE_FORMAT(dataHora,'%H:%i:%s') as momento_grafico, nome, fkSensor from Setor
         right join Sensor on Sensor.fkSetor = Setor.idSetor
             right join dadosSensor on dadosSensor.fkSensor = Sensor.idSensor
                 where fkSensor = ${idSensor} order by dataHora desc limit 1`;

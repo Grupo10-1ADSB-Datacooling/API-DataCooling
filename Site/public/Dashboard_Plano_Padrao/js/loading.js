@@ -8,10 +8,6 @@ function exibirConteudo(){
     header.style.display = 'flex';
     container.style.display = 'flex';
     window.onload = validarSessao();
-    window.onload = setTimeout(listarDataRegistro, 100);
-    setTimeout(obterDadosGraficos, 150)
-
-
 }
 
 function exibirLoader(delay, urlCss, urlImg){

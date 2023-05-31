@@ -23,7 +23,7 @@ function listarDataRegistro(idEmpresa, idSensor){
     var instrucao = `
     SELECT DATE_FORMAT(dataHora, '%Y-%m-%d') AS dataRegistro, DATE_FORMAT(dataHora,'%d/%m/%Y') AS dataFormatada, dataHora FROM dadosSensor
     JOIN Sensor ON dadosSensor.fkSensor = Sensor.idSensor
-        WHERE Sensor.fkEmpresa = ${idEmpresa} AND Sensor.idSensor = ${idSensor} GROUP BY dataRegistro;`;
+        WHERE Sensor.fkEmpresa = ${idEmpresa} AND Sensor.idSensor = ${idSensor} GROUP BY dataRegistro ORDER BY dataFormatada DESC;`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 
