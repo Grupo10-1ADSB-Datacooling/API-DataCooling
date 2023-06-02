@@ -19,35 +19,42 @@
                     <div class="icon">
                         <img src="./assets/seta-esquerda-teste.png" alt="" style="width: 6vh;">
                     </div>
-                    <div class="text"> Voltar</div>
+                    <div class="text">Voltar</div>
                 </button>
                 <div class="content-sign-up">
                     <div class="sign-up-informations">
                         <h1 class="informations-title"> Cadastrar </h1>
                         <span class="informations-text">
-                            Seja bem-vindo, crie sua conta e tenha acesso a nossos serviços.
+                            Insira os dados que sua empresa forneceu para validação da conta.
                         </span>
                     </div>
                     <div class="form-sign-up">
                         <div class="form-item">
-                            <h4 class="form-title"> Nome </h4>
-                            <input class="form-input" id="ipt_nome" placeholder="Nome" type="text">
+                            <h4 class="form-title"> Token </h4>
+                            <input class="form-input" id="ipt_token" type="text" placeholder="Insira seu token">
                         </div>
                         <div class="form-item">
-                            <h4 class="form-title"> Sobrenome </h4>
-                            <input class="form-input" id="ipt_sobrenome" placeholder="Sobrenome" type="text">
-                        </div><div class="form-item">
-                            <h4 class="form-title"> Nome Empresa</h4>
-                            <input class="form-input" id="ipt_nome_empresa" placeholder="Nome da Empresa" type="text">
+                            <h4 class="form-title"> Email </h4>
+                            <input class="form-input" id="ipt_email" placeholder="Seu email corporativo" type="text">
                         </div>
-                        
+                        <div class="form-item">
+                            <h4 class="form-title"> Senha </h4>
+                            <input class="form-input" id="ipt_senha" type="password" placeholder="Sua senha">
+                            <input type="checkbox" onclick="mostrarOcultarSenha()"> <span>Mostrar senha</span>
+                        </div>
+                        <!-- <div class="form-item">
+                            <h4 class="form-title" id="titleCep"> Cargo </h4>
+                            <input class="form-input" id="ipt_cep" type="text" placeholder="00000-000">
+                        </div> -->
+
                         <div class="form-item">
 
-                            <button class="form-button" onclick="cadastrarEmpresa()"> Continuar </button>
+                            <button class="form-button" id="btn_cadastrar" onclick="cadastrarEmpresa2()"> Cadastrar
+                            </button>
                         </div>
                     </div>
                     <div class="redirect">
-                        Já possui uma conta? <a href="../Login/index.html"> Entrar </a>
+                        Já possui uma conta? <a href="login.html"> Entrar </a>
                     </div>
                 </div>
             </div>

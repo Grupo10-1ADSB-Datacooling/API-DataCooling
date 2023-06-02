@@ -31,13 +31,12 @@ function entrar() {
                     console.log(json);
                     console.log(JSON.stringify(json));
 
-                    sessionStorage.ID = json.idEmpresa;
-                    sessionStorage.RAZAO_SOCIAL = json.razaoSocial;
+                    sessionStorage.ID = json.idUsuario;
+                    sessionStorage.NOME = json.nome;
+                    sessionStorage.SOBRENOME = json.sobrenome;
                     sessionStorage.EMAIL = json.email;
-                    sessionStorage.CNPJ = json.cnpj;
-                    sessionStorage.CEP = json.cep;
-                    sessionStorage.TEL_FIXO = json.telFixo;
-                    sessionStorage.PLANO = json.nome;
+                    sessionStorage.FK_EMPRESA = json.fkEmpresa;
+                    sessionStorage.NOME_EMPRESA = json.nomeEmpresa;
 
                     window.location = "Dashboard_Plano_Padrao/index.html"
 

@@ -1,82 +1,84 @@
-var nome;
-var sobrenome;
-var email;
-var senha;
-var cargo;
+function exibirUsuarioCadastrado() {
+    var fkAdmin = sessionStorage.ID_USUARIO;
 
-function cadastrarUsuario(){
-    nome = ipt_nome.value;
-    sobrenome = ipt_sobrenome.value;
-    email = ipt_email.value;
-    senha = ipt_senha.value;
-    cargo = select_cargo.value;
+    fetch(`/usuario/listarUsuario/${fkAdmin}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            console.log(response)
+            response.json().then(function (resposta) {
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                resposta.reverse();
+                exibirUsuario(resposta);
 
-    if(nome == '' || sobrenome == '' || email == '' || senha == '' || cargo == ''){
-        alert('Preencha os campos!');
-    } else {
-        localStorage.setItem('nomeCadastrado', nome);
-        localStorage.setItem('sobrenomeCadastrado', sobrenome);
-        localStorage.setItem('emailCadastrado', email);
-        localStorage.setItem('senhaCadastrado', senha);
-        localStorage.setItem('cargoCadastrado', cargo);
-        window.location.href = './meusUsuarios.html';
-    }
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
 }
 
-function exibirUsuarioCadastrado(){
-    nome = localStorage.getItem('nomeCadastrado');
-    sobrenome = localStorage.getItem('sobrenomeCadastrado');
-    email = localStorage.getItem('emailCadastrado');
-    senha = localStorage.getItem('senhaCadastrado');
-    cargo = localStorage.getItem('cargoCadastrado');
-
+function exibirUsuario(resposta){
     var users = document.querySelector('.users');
-    if(nome != null){
-        users.innerHTML += 
-            `<div class="card-users">
-                <div class="profile">
-                    <img class="img-users" src="./../../assets/dadinho_perfil_3.png">
-                    <div class="icon-pen" onclick="redirecionar('${nome}','${sobrenome}', '${email}', '${senha}', '${cargo}')">
-                        <label class="icon">
-                            <i class="fa-solid fa-pen"></i>
-                        </label>
-                    </div>
-                </div>
-                <span class="name-user">
-                    <h4 id="nameUser"> ${nome} ${sobrenome} </h4>
-                    <h5> ${cargo} </h5>
-                </span>
-            </div>`;
+    for(var contadorUsuario = 0; contadorUsuario < resposta.length; contadorUsuario++){
+        users.innerHTML +=
+        `<div class="card-users">
+            <div class="profile">
+                <img class="img-users" src="./../../assets/dadinho_perfil_3.png">
+            </div>
+            <span class="name-user">
+                <h4 id="nameUser"> ${nome} ${sobrenome} </h4>
+                <h5> ${email} </h5>
+            </span>
+        </div>`;
     }
 }
 
-function redirecionar(nome, sobrenome, email, senha, cargo){
-    localStorage.setItem('nomeUsuario', nome);
-    localStorage.setItem('sobrenomeUsuario', sobrenome);
-    localStorage.setItem('emailUsuario', email);
-    localStorage.setItem('senhaUsuario', senha);
-    localStorage.setItem('cargoUsuario', cargo);
-    window.location.href = "./dadosUsuario.html";
+function gerarStringAleatoria() {
+    var fkEmpresa = sessionStorage.FK_EMPRESA;
+    var valorToken = '';
+    var caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+    for (var i = 0; i < 30; i++) {
+        valorToken += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+    }
+
+    fetch("../usuarios/gerarToken", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            // crie um atributo que recebe o valor recuperado aqui
+            // Agora vá para o arquivo routes/usuario.js
+            valorServer: valorToken,
+            fkEmpresaServer: fkEmpresa
+        })
+    }).then(function (resposta) {
+
+        console.log("resposta: ", resposta);
+        
+        if (resposta.ok) {
+            mensagem.innerHTML = `<input id="a" value="${valorToken}" style="width: 38vh;" readonly class="ipt_token">`
+            btn_copiar.innerHTML = `<button onclick="copiar()" class="copy_bnt" readonly >Copiar</button>`
+            
+        } else {
+            throw ("Houve um erro ao tentar gerar um token!");
+        }
+    }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+    });
+
+    return false;
+
 }
 
-function exibirDadosUsuario(){
-    nome = localStorage.getItem('nomeUsuario');
-    sobrenome = localStorage.getItem('sobrenomeUsuario');
-    email = localStorage.getItem('emailUsuario');
-    senha = localStorage.getItem('senhaUsuario');
-    cargo = localStorage.getItem('cargoUsuario');
-
-    var imgUser = document.querySelector('.img-profile-user')
-    var inputNome = document.getElementById('ipt_nome');
-    var inputSobrenome = document.getElementById('ipt_sobrenome');
-    var inputEmail = document.getElementById('ipt_email');
-    var inputSenha = document.getElementById('ipt_senha');
-    var selectCargo = document.getElementById('select_cargo');
-
-    imgUser.src = `./../../assets/${nome}.png`
-    inputNome.value = nome;
-    inputSobrenome.value = sobrenome;
-    inputEmail.value = email;
-    inputSenha.value = senha;
-    selectCargo.value = cargo;
+function copiar() {
+    var b = document.getElementById("a").select();
+    if (!(document.execCommand("paste"))) {
+        document.execCommand("copy")
+        mensagem.innerHTML += `<br><span style="color: #0bcd4d;">Token copiado.</span>`
+    }
 }

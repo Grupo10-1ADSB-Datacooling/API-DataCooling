@@ -2,31 +2,20 @@
 function validarSessao() {
     // aguardar();
 
+    var nome = sessionStorage.NOME;
+    var sobrenome = sessionStorage.SOBRENOME;
     var email = sessionStorage.EMAIL;
-    var razaoSocial = sessionStorage.RAZAO_SOCIAL;
-    var plano = sessionStorage.PLANO;
-    var email = sessionStorage.EMAIL;
-    var cnpj = sessionStorage.CNPJ;
-    var cep = sessionStorage.CEP; 
-    var telFixo = sessionStorage.TEL_FIXO;
+    var nomeEmpresa = sessionStorage.NOME_EMPRESA;
 
-    var razaoSocialEmpresa = document.getElementById("razaoSocial");
-    var planoEmpresa = document.getElementById('plano');
-    var emailEmpresa = document.getElementById('email');
-    var cnpjEmpresa = document.getElementById('cnpj');
-    var cepEmpresa = document.getElementById('cep');
-    var telFixoEmpresa = document.getElementById('telFixo');
+    var nomeUsuario = document.getElementById("nomeUsuario");
 
-    if (email != null && razaoSocial != null) {
-        // window.alert(`Seja bem-vindo, ${razaoSocial}!`);
+    if (email != null && nome != null) {
+        // window.alert(`Seja bem-vindo, ${nome}!`);
         
-        razaoSocialEmpresa.innerHTML = razaoSocial;
-        // planoEmpresa.innerHTML = plano;
-        // emailEmpresa.innerHTML = email;
-        // cnpjEmpresa.innerHTML = cnpj; 
-        // cepEmpresa.innerHTML =  cep;
-        // telFixoEmpresa.innerHTML = telFixo;
-        // finalizarAguardar();
+        nomeUsuario.innerHTML = `${nome} ${sobrenome}`;
+        emailUsuario.innerHTML = email;
+        nomeEmpresa.innerHTML = nome;
+        finalizarAguardar();
     } else {
         window.location = "../login.html";
     }

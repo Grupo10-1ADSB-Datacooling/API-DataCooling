@@ -7,7 +7,7 @@ function exibirConteudo(){
     loading.style.display = 'none';
     header.style.display = 'flex';
     container.style.display = 'flex';
-    window.onload = validarSessao();
+    // window.onload = validarSessao();
 }
 
 function exibirLoader(delay, urlCss, urlImg){

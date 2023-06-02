@@ -24,6 +24,26 @@ function listar(req, res) {
         );
 }
 
+function buscarEmpresa(req, res) {
+    var valorToken = req.params.valorToken;
+    var nomeEmpresa = req.params.nomeEmpresa;
+
+    console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
+
+    medidaModel.buscarEmpresa(valorToken, nomeEmpresa).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar empresa", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
 function listarSensores(req, res) {
     var idEmpresa = req.body.idEmpresaServer;
 
@@ -96,35 +116,66 @@ function entrar(req, res) {
                 }
             );
     }
-
 }
 
 function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-    var razaoSocial = req.body.razaoSocialServer;
+    var nome = req.body.nomeServer;
+    var sobrenome = req.body.sobrenomeServer;
+    var nomeEmpresa = req.body.nomeEmpresaServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
-    var cnpj = req.body.cnpjServer;
-    var cep = req.body.cepServer;
-    var telFixo = req.body.telefoneFixoServer;
+    var valorToken = req.body.valorTokenServer;
 
     // Faça as validações dos valores
-    if (razaoSocial == undefined) {
-        res.status(400).send("Seu razaoSocial está undefined!");
-    } else if (email == undefined) {
-        res.status(400).send("Seu email está undefined!");
+    if (nome == undefined) {
+        res.status(400).send("Seu nome está undefined!");
+    } else if (sobrenome == undefined) {
+        res.status(400).send("Seu sobrenome está undefined!");
+    } else if (valorToken == undefined) {
+        res.status(400).send("Seu fkEmpresa está undefined!");
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está undefined!");
-    } else if (cnpj == undefined) {
-        res.status(400).send("Seu cnpj está undefined!");
-    } else if (cep == undefined) {
-        res.status(400).send("Seu cep está undefined!");
-    } else if (telFixo == undefined) {
-        res.status(400).send("Seu telFixo está undefined!");
+    } else if (email == undefined) {
+        res.status(400).send("Seu email está undefined!");
+    } else if (valorToken == undefined) {
+        res.status(400).send("Seu fkEmpresa está undefined!");
     } else {
         
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(razaoSocial, email, senha, cnpj, cep, telFixo)
+        usuarioModel.cadastrar(nome, sobrenome, email, senha, fkEmpresa)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+
+function gerarToken(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var valorToken = req.body.valorServer;
+    var fkEmpresa = req.body.fkEmpresaServer;
+
+    // Faça as validações dos valores
+    if (valorToken == undefined) {
+        res.status(400).send("Seu token está undefined!");
+    } else if (fkEmpresa == undefined) {
+        res.status(400).send("Seu fkEmpresa está undefined!");
+    } else {
+        
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.gerarToken(valorToken, fkEmpresa)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -145,8 +196,10 @@ function cadastrar(req, res) {
 module.exports = {
     entrar,
     cadastrar,
+    buscarEmpresa,
     listar,
     listarSensores,
     listarDataRegistro,
+    gerarToken,
     testar
 }

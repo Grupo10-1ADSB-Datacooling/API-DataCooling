@@ -11,11 +11,11 @@
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <script src="./js/loading.js"></script>
     <script src="./../funcoes.js"></script>
-    <script src="./script.js"></script>
+    <script src="./js/scriptUsuarios.js"></script>
     <title> Meus usuários - DataCooling </title>
 </head>
 
-<body onload="exibirLoader(700, './../loading.css', './../assets/datacooling.png'), exibirUsuarioCadastrado()">
+<body onload="exibirLoader(300, './../loading.css', './../assets/datacooling.png'), exibirUsuarioCadastrado()">
     <header id="header">
         <nav>
             <div class="informations-profile">
@@ -29,7 +29,7 @@
                         </button>
                     </a>
                 </div>
-                <h3 id="razaoSocial"> </h3>
+                <h3 id="nomeUsuario"></h3>
             </div>
             <ul class="list-navegation">
                 <li class="list-item">
@@ -54,31 +54,34 @@
                 </li>
             </ul>
             <label class="logout">
-                <button class="logout-button" onclick="limparSessao()">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                    Sair da conta
-                </button>
+                <a href="./../login.html">
+                    <button class="logout-button" onclick="sairDaConta()">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        Sair da conta
+                    </button>
+                </a>
             </label>
         </nav>
     </header>
     <div class="container" id="container">
         <div class="nav">
             <div class="logo">
-                <a href="./../index.html">
-                    <img class="img-logo" src="./../assets/datacooling.png">
+                <a href="./../Tela-Inicial/index.HTML">
+                    <img class="img-logo" src="./../../assets/datacooling.png">
                 </a>
             </div>
         </div>
         <div class="content">
             <div class="informations">
                 <h1 class="informations-title"> Meus usuários </h1>
-                <a href="./cadastroUsuarios.html">
-                    <button class="btn-add">
+                    <div id="mensagem"></div>
+                    <div id="btn_copiar"></div>
+                    <button class="btn-add" onclick="gerarStringAleatoria()">
                         <label class="icon">
                             <i class="fa-solid fa-plus"></i>
                         </label>
                         <span class="text-button">
-                            Adicionar
+                            Gerar token
                         </span>
                     </button>
                 </a>
@@ -86,44 +89,10 @@
             <div class="users">
                 <div class="card-users">
                     <div class="profile">
-                        <img class="img-users" src="./../assets/Bruno.png">
-                        <div class="icon-pen" onclick="redirecionar('Bruno', 'Santos', 'bruno.santos@bambam.datacenter', 'bruno.bambam', 'Gerente de TI')">
-                            <label class="icon">
-                                <i class="fa-solid fa-pen"></i>
-                            </label>
-                        </div>
+                        <img class="img-users" src="./../../assets/Bruno.png">
                     </div>
                     <span class="name-user">
                         <h4 id="nameUser"> Bruno Santos</h4>
-                        <h5> Gerente de TI </h5>
-                    </span>
-                </div>
-                <div class="card-users">
-                    <div class="profile">
-                        <img class="img-users" src="./../assets/Débora.png">
-                        <div class="icon-pen" onclick="redirecionar('Débora', 'Assis', 'debora.assis@bambam.datacenter', 'debora.bambam', 'Arquiteta de TI')">
-                            <label class="icon">
-                                <i class="fa-solid fa-pen"></i>
-                            </label>
-                        </div>
-                    </div>
-                    <span class="name-user">
-                        <h4 id="nameUser"> Débora Assis </h4>
-                        <h5> Arquiteta de TI </h5>
-                    </span>
-                </div>
-                <div class="card-users">
-                    <div class="profile">
-                        <img class="img-users" src="./../assets/Jeferson.png">
-                        <div class="icon-pen" onclick="redirecionar('Jeferson', 'Pereira', 'jeferson.pereira@bambam.datacenter', 'jeferson.bambam', 'Subgerente de TI')">
-                            <label class="icon">
-                                <i class="fa-solid fa-pen"></i>
-                            </label>
-                        </div>
-                    </div>
-                    <span class="name-user">
-                        <h4 id="nameUser"> Jeferson Pereira </h4>
-                        <h5> Subgerente de TI </h5>
                     </span>
                 </div>
             </div>

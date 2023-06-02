@@ -325,4 +325,37 @@
     background-color: #000;
 }
 
+/* Estilização da funcionalidade de gerar token */
+
+.ipt_token{
+    width: 38vh;
+    height: 5vh;
+    background-color: #161616;
+    border: 1px solid rgba(255, 255, 255 , 0.03);
+    border-radius: 0.5vw;
+    font-size: 0.8vw;
+    font-weight: 200;
+    color: #C3C3C3;
+}
+
+.container .content .informations .copy_bnt{
+    cursor: pointer;
+    background-color: #37C1CA;
+    color: #fff;
+    width: 11vw;
+    height: 5vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.05);
+    transition: all 0.35s ease-in-out;
+    font-size: 0.8vw;
+}
+
+.container .content .informations .copy_bnt:hover{
+    background-color: #000;
+}
+
 

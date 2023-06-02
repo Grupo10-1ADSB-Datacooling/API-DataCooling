@@ -154,8 +154,8 @@ function obterDados(idSensor) {
 
                 console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
 
+                alertar(novoRegistro, novoRegistro[0].nomeSetor)
                 plotarDados(novoRegistro, novoRegistro[0].fkSensor);
-                alertar(novoRegistro, novoRegistro[0].nome);
 
                 // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
                 proximaAtualizacao = setTimeout(() => obterDados(idSensor), 3000);
@@ -247,10 +247,10 @@ function plotarDados(resposta, idSensor) {
 
 
 function alertar(resposta, nomeSetor) {
+    console.log("Sensor: " + resposta[0].fkSensor)
     var idSensor = resposta[0].fkSensor;
     var temp = resposta[0].temperatura;
     var umid = resposta[0].umidade;
-    console.log(resposta);
 
     var grauDeAvisoTemperatura = '';
     var grauDeAvisoUmidade = '';

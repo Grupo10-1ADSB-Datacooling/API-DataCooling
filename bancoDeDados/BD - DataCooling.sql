@@ -7,35 +7,28 @@
         
         RELAÇÃO 1:N
         
-	* USUÁRIO PARA CARGO
-    
-		UM CARGO PODE SER DE MUITOS USUÁRIOS;
-		UM USUÁRIO SÓ PODE TER UM CARGO;
-        
-        RELAÇÃO 1:N
-        
-    * EMPRESA PARA USUÁRIO:
+	* EMPRESA PARA USUÁRIO:
     
 		UMA EMPRESA PODE TER MUITOS USUÁRIOS;
 		UM USUÁRIO SÓ PODE SER DE UMA EMPRESA;
         
         RELAÇÃO 1:N
-        
-	* EMPRESA PARA SENSOR
+      
+	* EMPRESA PARA SETOR
 	
-		UMA EMPRESA PODE TER MUITOS SENSORES;
-		UM SENSOR SÓ PODE SER DE UMA EMPRESA;
+		UMA EMPRESA PODE POSSUI MUITOS SETORES;
+		UM SETOR SÓ PODE SER DE UMA EMPRESA;
         
         RELAÇÃO 1:N
     
-    * SENSOR PARA SETOR
+    * SETOR PARA SENSOR
     
 		UM SETOR/LOCAL PODE TER VÁRIOS SENSORES;
 		UM SENSOR SÓ PODE ESTAR EM UM SETOR/LOCAL;
         
         RELAÇÃO 0:N
     
-    * SENSOR PARA REGISTRO
+    * SENSOR PARA REGISTRO / DADOS_SENSOR
     
 		UM SENSOR PODE TER MUITOS REGISTROS;
 		UM REGISTRO SÓ PODE SER DE UM SENSOR;
@@ -46,38 +39,35 @@
 
 -- CRIANDO O BANCO DE DADOS
 
-	CREATE DATABASE DataCooling;
+	CREATE DATABASE DataCooling1;
 
 -- SELECIONANDO O BANCO DE DADOS
 
-	USE DataCooling;
+	USE DataCooling1;
     
 -- TABELA DOS PLANOS
 
 	CREATE TABLE Plano (
     idPlano INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45),
+    qtdUsuario INT,
+    qtdSetores INT,
+    qtdSensores INT,
     CONSTRAINT chkNome CHECK (nome IN ('Basic', 'Padrão', 'Premium'))
     );
 
 -- INSERÇÃO DE REGISTROS NA TABELA PLANO
 
 	INSERT INTO Plano VALUES
-		(null, 'Basic'),
-		(null, 'Padrão'),
-		(null, 'Premium');
+		(null, 'Basic', 2, 2, 2),
+		(null, 'Padrão', 4, 4, 4),
+		(null, 'Premium', 1000, 1000, 1000);
         
 -- EXIBINDO OS DADOS DA TABELA DE PLANOS
 
 	SELECT * FROM Plano;
 
 -- TABELA DA EMPRESA
-
-	update cadastroEmpresa set telFixo = '(11) 3820-2990' where idEmpresa = 6;
-
-        SELECT Plano.nome AS nomePlano, idEmpresa, razaoSocial, email, cnpj, cep, telFixo FROM cadastroEmpresa JOIN Plano ON Plano.idPlano = cadastroEmpresa.fkPlano;
-        SELECT * FROM Plano JOIN cadastroEmpresa ON Plano.idPlano = cadastroEmpresa.fkPlano WHERE email = 'admin@bambam.datacenter' AND senha = '#Kb0123';
-
 
 	CREATE TABLE Empresa (
 	idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
@@ -87,19 +77,43 @@
 	cep CHAR(9) NOT NULL,
     numero INT NOT NULL,
     fkPlano INT,
-    CONSTRAINT fkPlano FOREIGN KEY (fkPlano) REFERENCES Plano(idPlano)
+    CONSTRAINT fkPlanoEmpresa FOREIGN KEY (fkPlano) REFERENCES Plano(idPlano)
 	);
         
 -- INSERÇÃO DE REGISTROS NA TABELA DE EMPRESA
 
 	INSERT INTO Empresa VALUES
-		(null, 'Clebinho Datacenter', '01234567890001', 'cleber@clebinhocenter.com', 'cleber1234', null, '01001001', 2),
-		(null, 'Datacenter guib', '01234567890002', 'guibao@guibcenter.com', 'guib1234', null, '01001002', 1),
-		(null, 'Rogers Datacenter', '01234567890003', 'rodrigo@rogercenter.com', 'roger1234', null, '01001003', 3);
+		(null, 'Elena Datacenter', '01234567890003', null, '08594003', 1200, 1),
+		(null, 'Luiza Datacenter', '08924567895783', null, '03891003', 875, 3),
+		(null, 'Bambam Datacenter', '01234590174838', null, '05898403', 478, 2);
         
 -- EXIBINDO OS DADOS DA TABELA DE EMPRESA
 
-	SELECT * FROM cadastroEmpresa;
+	SELECT * FROM Empresa;
+    
+-- TABELA DE TOKEN
+
+	CREATE TABLE Token (
+		idToken INT AUTO_INCREMENT,
+        fkEmpresa INT,
+        valor CHAR(30),
+        dtCriacao DATETIME,
+        CONSTRAINT fkTokenEmpresa FOREIGN KEY (fkEmpresa) REFERENCES Empresa(idEmpresa),
+        CONSTRAINT pkCompostaToken PRIMARY KEY (idToken, fkEmpresa),
+        UNIQUE KEY (fkEmpresa)
+	)AUTO_INCREMENT = 10000;
+    
+-- INSERÇÃO DE REGISTROS NA TABELA TOKEN
+
+	INSERT INTO Token VALUES
+		(null, 1, 'jfgo95ugi3u98htuh983y9fn949hv3', '2023-05-23 10:37:38'),
+		(null, 2, 'ibgtio894u8goneh984uoin09490k0', '2023-05-30 18:49:12'),
+		(null, 3, '3iuhguibiu4i839hngon83u8ngois2', '2023-05-27 19:12:53');
+        
+        
+-- EXIBINDO OS REGISTROS DA TABELA TOKEN
+	
+    SELECT * FROM Token;
     
 -- TABELA DE PERFIS DA EMPRESA
 
@@ -110,20 +124,29 @@
 	sobrenome VARCHAR(45) NOT NULL,
     email VARCHAR(45) NOT NULL,
     senha VARCHAR(45) NOT NULL,
+    fkUsuarioAdmin INT,
 	CONSTRAINT fkEmpresaUsuario FOREIGN KEY (fkEmpresa) REFERENCES Empresa(idEmpresa), -- FOREIGN KEY PARA IDENTIFICAR A EMPRESA QUE POSSUI O USUÁRIO
+	CONSTRAINT fkUsuarioAdmin FOREIGN KEY (fkUsuarioAdmin) REFERENCES Usuario(idUsuario), -- FOREIGN KEY PARA IDENTIFICAR QUEM É O USUÁRIO ADMIN
 	CONSTRAINT pkCompostaUsuario PRIMARY KEY (idUsuario, fkEmpresa), -- PRIMARY KEY COMPOSTA DOS CAMPOS FK_EMPRESA E ID_USUARIO
     UNIQUE KEY (email)
-	)AUTO_INCREMENT = 10;
+	);
 
--- INSERÇÃO DE REGISTROS NA TABELA DE USUÁRIO
+-- INSERÇÃO DOS USUÁRIOS ADMINS NA TABELA DE USUÁRIO
 
 	INSERT INTO Usuario VALUES
-		(null, 1, 'Marlos', 'Kalika', 'marlos.kalika@clebinhocenter.com', 'LeiteComMangaNaoFazMal'),
-		(null, 1, 'Célia', 'Soares', 'celia.soares@clebinhocenter.com', '#CenterData'),
-		(null, 2, 'Luíza', 'Venoza', 'luiza.venoza@guibcenter.com', 'SalonLine'),
-		(null, 2, 'Luís', 'Barros', 'luis.barros@guibcenter.com', 'XampsonMoraes'),
-		(null, 3, 'Cássio', 'Dias', 'cassio.dias@rogercenter.com', '51EhPinga'),
-		(null, 3, 'Yuri', 'Martins', 'yuri.martins@rogercenter.com', 'PalmeirasNaoTemMundial');
+		(null, 1, 'Elena', 'Kalika', 'admin@elena.datacenter.', 'LeiteComMangaNaoFazMal', null),
+		(null, 2, 'Luíza', 'Venoza', 'admin@luiza.datacenter', 'SalonLine', null),
+		(null, 3, 'Kleber', 'Bambam', 'admin@bambam.datacenter', '#Kb0123', null);
+        
+-- INSERÇÃO DE USUÁRIOS NORMAIS NA TABELA DE USUÁRIO
+
+	INSERT INTO Usuario VALUES
+		(null, 1, 'Célia', 'Soares', 'celia.soares@elena.datacenter.com', '#CenterData', 1),
+		(null, 2, 'Luís', 'Barros', 'luis.barros@luiza.datacenter', 'XampsonMoraes', 2),
+		(null, 2, 'Cássio', 'Dias', 'cassio.dias@luiza.datacenter', '51EhPinga', 2),
+		(null, 2, 'Yuri', 'Martins', 'yuri.martins@luiza.datacenter', 'PalmeirasNaoTemMundial', 2),
+		(null, 3, 'Martha', 'Santos', 'martha.santos@bambam.datacenter', 'Batata123', 3),
+		(null, 3, 'Carolina', 'Bambam', 'carolina@bambam.datacenter', '#Cb0123', 3);
         
 -- EXIBINDO OS DADOS DA TABELA DE USUÁRIO
 
@@ -133,61 +156,57 @@
 
 	CREATE TABLE Setor(
     idSetor INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(45)
+    nome VARCHAR(45),
+    fkEmpresa INT,
+    CONSTRAINT fkSetorEmpresa FOREIGN KEY (fkEmpresa) REFERENCES Empresa(idEmpresa)
     );
     
 -- INSERÇÃO DE REGISTROS NA TABELA DE SETORES
 
 	INSERT INTO Setor VALUES
-		(null, 'Setor A'),
-		(null, 'Setor B'),
-		(null, 'Setor C'),
-		(null, 'Setor D');
+		(null, 'Setor A', 1),
+		(null, 'Setor B', 1),
+		(null, 'Setor 1', 2),
+		(null, 'Setor 2', 2),
+		(null, 'Setor 3', 2),
+		(null, 'Setor 4', 2),
+		(null, 'Setor 5', 2),
+		(null, 'Setor 1A', 3),
+		(null, 'Setor 1B', 3),
+		(null, 'Setor 1C', 3),
+		(null, 'Setor 1D', 3);
         
 -- EXIBINDO OS DADOS DA TABELA DOS SETORES
 
 	SELECT * FROM Setor;
-    
-            SELECT nome AS nomeSetor, idSensor, tipo, statusSensor FROM Setor RIGHT JOIN Sensor ON Sensor.fkSetor = Setor.idSetor  WHERE fkEmpresa = 6 ;
-
 
 -- TABELA DO SENSOR
 
 	CREATE TABLE Sensor(
 	idSensor INT PRIMARY KEY AUTO_INCREMENT,
-	tipo CHAR(5), CONSTRAINT chkTipoSensor CHECK (tipo IN('DHT11')),
 	statusSensor VARCHAR(15), CONSTRAINT chkStatusSensor CHECK (statusSensor IN ('Ativo', 'Inativo', 'Manutenção')), -- STATUS DO SENSOR PODENDO TER SOMENTE OS TRÊS VALORES DA CHECK
     fkSetor INT,
-	fkEmpresa INT,
-    CONSTRAINT fkSetorSensor FOREIGN KEY (fkSetor) REFERENCES Setor(idSetor), -- FOREIGN KEY PARA IDENTIFICAR O SETOR QUE ESTÁ LOCALIZADO O SENSOR
-	CONSTRAINT fkEmpresaSensor FOREIGN KEY (fkEmpresa) REFERENCES Empresa(idEmpresa) -- FOREIGN KEY PARA IDENTIFICAR A EMPRESA QUE POSSUI O SENSOR
+    CONSTRAINT fkSetorSensor FOREIGN KEY (fkSetor) REFERENCES Setor(idSetor) -- FOREIGN KEY PARA IDENTIFICAR O SETOR QUE ESTÁ LOCALIZADO O SENSOR
 	) AUTO_INCREMENT = 100;
 
 -- INSERÇÃO DE REGISTROS NA TABELA DE SENSOR
 
 	INSERT INTO Sensor VALUES
-		(null, 'DHT11', 'Ativo', 1, 1),
-		(null, 'DHT11', 'Ativo', 2, 1),
-		(null, 'DHT11', 'Manutenção', null, 2),
-		(null, 'DHT11', 'Ativo', 2, 2),
-		(null, 'DHT11', 'Inativo', 3, 2),
-		(null, 'DHT11', 'Ativo', 1, 3),
-		(null, 'DHT11', 'Inativo', 2, 3);
-
-	INSERT INTO Sensor VALUES
-		(null, 'DHT11', 'Ativo', 1, 6),
-		(null, 'DHT11', 'Ativo', 2, 6),
-		(null, 'DHT11', 'Ativo', 3, 6),
-		(null, 'DHT11', 'Manutenção', null, 6);
+		(null, 'Ativo', 1),
+		(null, 'Ativo', 2),
+		(null, 'Ativo', 3),
+		(null, 'Inativo', 4),
+		(null, 'Ativo', 5),
+		(null, 'Manutenção', 6),
+		(null, 'Ativo', 7),
+		(null, 'Ativo', 8),
+		(null, 'Ativo', 9),
+		(null, 'Ativo', 10),
+		(null, 'Manutenção', 11);
 
 -- EXIBINDO OS DADOS DA TABELA DE SENSOR
 
 	SELECT * FROM Sensor;
-    
-    select temperatura, umidade, dataHora, DATE_FORMAT(dataHora,'%H:%i:%s') as momento_grafico from setor
-	        join sensor on sensor.fkSetor = setor.idSetor
-		        join dadosSensor on dadosSensor.fkSensor = sensor.idSensor
-			        where fkSensor = 107 order by dataHora desc limit 5;
 
 -- TABELA DOS REGISTROS(DADOS) DO SENSOR
 
@@ -198,47 +217,47 @@
 	umidade DOUBLE,
 	CONSTRAINT fkSensor FOREIGN KEY (fkSensor) REFERENCES Sensor(idSensor), -- FOREIGN KEY PARA IDENTIFICAR O SENSOR QUE CAPTA OS DADOS
 	CONSTRAINT pkCompostaDados PRIMARY KEY (dataHora, fkSensor)
-	) AUTO_INCREMENT = 1000;
+	);
 
 -- INSERÇÃO DE REGISTRO NA TABELA DE DADOS_SENSOR
 
 	INSERT INTO dadosSensor VALUES
-		('2023-03-10 22:20:00', 100, 24, 50),
-		('2023-03-10 22:21:00', 100, 23.5, 50),
-		('2023-03-10 22:20:00', 101, 24, 49),
-		('2023-03-10 22:21:00', 103, 24, 49),
-		('2023-03-10 22:20:00', 103, 26, 51),
-		('2023-03-10 22:20:00', 104, null, null),
-		('2023-03-10 22:20:00', 105, 45.1, 47),
-		('2023-03-10 22:21:00', 105, 46, 47),
-		('2023-03-10 22:22:00', 106, null, null);
+		('2023-06-02 12:20:53', 100, 24, 50),
+		('2023-06-02 12:21:03', 100, 23.5, 50),
+		('2023-06-02 12:21:23', 101, 24, 49),
+		('2023-06-02 12:21:25', 101, 24, 49),
+		('2023-06-02 12:21:06', 102, 26, 51),
+		('2023-06-02 12:21:10', 102, 45.1, 47),
+		('2023-06-02 12:21:20', 103, 46, 47),
+		('2023-06-02 12:21:50', 104, 23.5, 50),
+		('2023-06-02 12:21:30', 104, 24, 49),
+		('2023-06-02 12:21:32', 105, 24, 49),
+		('2023-06-02 12:21:33', 105, null, null),
+		('2023-06-02 12:21:34', 106, 29, 59),
+		('2023-06-02 12:21:35', 106, 45.1, 47),
+		('2023-06-02 12:21:36', 107, 46, 47),
+		('2023-06-02 12:21:35', 107, 32.1, 57),
+		('2023-06-02 12:21:38', 108, 23.4, 49),
+		('2023-06-02 12:21:32', 108, 29.1, 65),
+		('2023-06-02 12:21:04', 109, 23.2, 62),
+		('2023-06-02 12:21:55', 109, 24.5, 47),
+		('2023-06-02 12:21:43', 110, null, null),
+		('2023-06-02 12:21:22', 110, null, null);
         
 	INSERT INTO dadosSensor VALUES
-		('2023-03-10 22:20:08', 107, 24, 50),
-		('2023-03-10 22:21:00', 107, 23.5, 50),
-		('2023-03-10 22:20:03', 107, 24, 49),
-		('2023-03-10 22:21:05', 108, 24, 49),
-		('2023-03-10 22:20:48', 108, 26, 51),
-		('2023-03-10 22:20:10', 110, null, null),
-		('2023-03-10 22:20:57', 109, 45.1, 47),
-		('2023-03-10 22:21:28', 109, 46, 47),
-		('2023-03-10 22:22:19', 110, null, null);
-        
+		(now(), 107, 25, 50);
+			
 -- EXIBINDO OS DADOS DA TABELA DE DADOS_SENSOR
 
 	SELECT * FROM dadosSensor;
-    
-	SELECT nome AS nomeSetor, idSensor, tipo, statusSensor, dataHora, temperatura, umidade FROM Setor 
-		RIGHT JOIN Sensor ON Sensor.fkSetor = Setor.idSetor 
-			JOIN dadosSensor ON dadosSensor.fkSensor = Sensor.idSensor WHERE Sensor.fkEmpresa = 6 
-				GROUP BY idSensor;
-
 
 -- EXIBINDO OS DADOS DAS QUATRO TABELAS SEPARADAMENTE
 	
 		SELECT * FROM Plano;
 
-		SELECT * FROM cadastroEmpresa;
+		SELECT * FROM Empresa;
+        
+        SELECT * FROM Token;
         
 		SELECT * FROM Usuario;
         
@@ -250,14 +269,10 @@
 
 -- EXIBINDO O CEP DAS EMPRESAS QUE POSSUEM DETERMINADO CNPJ
 
-	SELECT cep FROM cadastroEmpresa WHERE cnpj = '01234567890002';
+	SELECT cep FROM Empresa WHERE cnpj = '01234567890002';
     
-	SELECT cep FROM cadastroEmpresa WHERE cnpj IN ('01234567890001', '01234567890003');
-
--- EXBINDO O EMAIL E TELEFONE DA EMPRESA QUE POSSUI DETERMINADO CNPJ
-
-	SELECT email, telFixo FROM cadastroEmpresa WHERE cnpj = '01234567890003';
-
+	SELECT cep FROM Empresa WHERE cnpj IN ('01234567890001', '01234567890003');
+    
 -- EXIBINDO SENSORES ATIVOS, INATIVOS OU EM MANUTENÇÃO
 
 	SELECT * FROM Sensor WHERE statusSensor = 'Ativo';
@@ -268,14 +283,16 @@
 
 -- EXIBINDO A EMPRESA A QUAL O SENSOR PERTENCE
 
-	SELECT Sensor.idSensor, Empresa.razaoSocial AS razaoSocialEmpresa FROM Sensor
-		JOIN cadastroEmpresa AS Empresa ON Sensor.fkEmpresa = Empresa.idEmpresa;
+	SELECT Sensor.idSensor, Empresa.razaoSocial AS nomeEmpresa FROM Sensor
+		JOIN Setor ON Sensor.fkSetor = Setor.idSetor
+			JOIN Empresa ON Setor.fkEmpresa = Empresa.idEmpresa;
 
 -- EXIBINDO A ALOCAÇÃO DO SENSOR E SEU STATUS DE DETERMINADA EMPRESA
 
 	SELECT Setor.nome AS setorAlocacao, Sensor.statusSensor FROM Sensor 
 		JOIN Setor ON Setor.idSetor = Sensor.fkSetor
-		WHERE fkEmpresa = 1;
+			JOIN Empresa ON Empresa.idEmpresa = Setor.fkEmpresa
+				WHERE fkEmpresa = 1;
 
 -- EXIBINDO OS DADOS DE UM SENSOR COM TEMPERATURA E UMIDADE ACIMA DO IDEAL
 
@@ -291,34 +308,35 @@
     
 -- EXIBINDO OS DADOS DAS EMPRESAS JUNTO COM SEUS RESPECTIVOS PLANOS
 
-	SELECT * FROM cadastroEmpresa
-		JOIN Plano ON cadastroEmpresa.fkPlano = Plano.idPlano;
+	SELECT * FROM Empresa
+		JOIN Plano ON Empresa.fkPlano = Plano.idPlano;
         
 -- EXIBINDO O NOME DA EMPRESA E O NOME DO SEU PLANO 
 
-	SELECT cadastroEmpresa.razaoSocial, Plano.nome AS nomePlano FROM cadastroEmpresa
-		JOIN Plano ON cadastroEmpresa.fkPlano = Plano.idPlano;
+	SELECT Empresa.razaoSocial, Plano.nome AS nomePlano FROM Empresa
+		JOIN Plano ON Empresa.fkPlano = Plano.idPlano;
 
 -- EXIBINDO OS DADOS DAS EMPRESAS JUNTO COM SEUS RESPECTIVOS USUÁRIOS
 
-	SELECT * FROM cadastroEmpresa 
-		JOIN Usuario ON cadastroEmpresa.idEmpresa = Usuario.fkEmpresa;
+	SELECT * FROM Empresa 
+		JOIN Usuario ON Empresa.idEmpresa = Usuario.fkEmpresa;
 		
 -- EXIBINDO OS DADOS DAS EMPRESAS JUNTO COM SEUS RESPECTIVOS SENSORES
 
-	SELECT * FROM cadastroEmpresa
-		JOIN Sensor ON cadastroEmpresa.idEmpresa = Sensor.fkEmpresa;
+	SELECT * FROM Empresa
+		JOIN Setor ON Empresa.idEmpresa = Setor.fkEmpresa
+			JOIN Sensor ON Setor.idSetor = Sensor.fkSetor;
 
--- EXIBINDO OS DADOS DOS USUÁRIOS JUNTO COM OS SEUS RESPECTIVOS CARGOS
+-- EXIBINDO OS DADOS DOS USUÁRIOS JUNTO COM OS SEUS RESPECTIVOS USUÁRIOS ADMINISTRADORES
 
-	SELECT * FROM Usuario 	
-		JOIN Cargo ON Usuario.fkCargo = Cargo.idCargo;
+	SELECT * FROM Usuario AS Usuario
+		JOIN Usuario AS Administrador ON Usuario.fkUsuarioAdmin = Administrador.idUsuario;
             
 -- EXIBINDO OS DADOS DOS USUÁRIOS JUNTO COM OS DADOS DA EMPRESA E OS DADOS DOS PLANOS
 
 	SELECT * FROM Usuario 
-		JOIN cadastroEmpresa ON Usuario.fkEmpresa = cadastroEmpresa.idEmpresa
-			JOIN Plano ON cadastroEmpresa.fkPlano = Plano.idPlano;
+		JOIN Empresa ON Usuario.fkEmpresa = Empresa.idEmpresa
+			JOIN Plano ON Empresa.fkPlano = Plano.idPlano;
 
 -- EXIBINDO OS DADOS DOS SENSORES JUNTO COM SEUS RESPECTIVOS REGISTROS
 
@@ -335,3 +353,4 @@
 	SELECT * FROM Sensor
 		JOIN Setor ON Sensor.fkSetor = Setor.idSetor
 			JOIN dadosSensor ON dadosSensor.fkSensor = Sensor.idSensor;
+		
