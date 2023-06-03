@@ -34,9 +34,12 @@ function entrar() {
                     sessionStorage.ID = json.idUsuario;
                     sessionStorage.NOME = json.nome;
                     sessionStorage.SOBRENOME = json.sobrenome;
+                    sessionStorage.NOME_ADMIN = json.nomeAdmin;
+                    sessionStorage.SOBRENOME_ADMIN = json.sobrenomeAdmin;
                     sessionStorage.EMAIL = json.email;
                     sessionStorage.FK_EMPRESA = json.fkEmpresa;
-                    sessionStorage.NOME_EMPRESA = json.nomeEmpresa;
+                    sessionStorage.FK_ADMIN = json.fkUsuarioAdmin;
+                    sessionStorage.NOME_EMPRESA = json.razaoSocial;
 
                     window.location = "Dashboard_Plano_Padrao/index.html"
 

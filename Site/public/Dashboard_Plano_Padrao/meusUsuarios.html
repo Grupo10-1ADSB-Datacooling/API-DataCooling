@@ -4,30 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styleUsuarios.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/styleUsuarios.css">
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="shortcut icon" href="./../assets/logo_datacooling.png" type="image/x-icon">
     <script src="https://kit.fontawesome.com/2780876011.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <script src="./js/loading.js"></script>
-    <script src="./../funcoes.js"></script>
+    <script src="./../js/funcoes.js"></script>
     <script src="./js/scriptUsuarios.js"></script>
     <title> Meus usuários - DataCooling </title>
 </head>
 
-<body onload="exibirLoader(300, './../loading.css', './../assets/datacooling.png'), exibirUsuarioCadastrado()">
+<body onload="exibirLoader(600), exibirUsuarioCadastrado()">
     <header id="header">
         <nav>
             <div class="informations-profile">
                 <div class="img-profile">
                     <img class="img-client" src="./../assets/kleber.png">
-                    <a href="./dadosUsuario.html">
+                    <!-- <a href="./dadosUsuario.html">
                         <button class="icon-settings">
                             <label class="icon">
                                 <i class="fa-solid fa-camera"></i>
                             </label>
                         </button>
-                    </a>
+                    </a> -->
                 </div>
                 <h3 id="nomeUsuario"></h3>
             </div>
@@ -87,14 +87,6 @@
                 </a>
             </div>
             <div class="users">
-                <div class="card-users">
-                    <div class="profile">
-                        <img class="img-users" src="./../../assets/Bruno.png">
-                    </div>
-                    <span class="name-user">
-                        <h4 id="nameUser"> Bruno Santos</h4>
-                    </span>
-                </div>
             </div>
         </div>
     </div>

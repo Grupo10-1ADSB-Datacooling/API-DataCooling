@@ -24,26 +24,6 @@ function listar(req, res) {
         );
 }
 
-function buscarEmpresa(req, res) {
-    var valorToken = req.params.valorToken;
-    var nomeEmpresa = req.params.nomeEmpresa;
-
-    console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
-
-    medidaModel.buscarEmpresa(valorToken, nomeEmpresa).then(function (resultado) {
-        if (resultado.length > 0) {
-            res.status(200).json(resultado);
-        } else {
-            res.status(204).send("Nenhum resultado encontrado!")
-        }
-    }).catch(function (erro) {
-        console.log(erro);
-        console.log("Houve um erro ao buscar empresa", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
-    });
-}
-
-
 function listarSensores(req, res) {
     var idEmpresa = req.body.idEmpresaServer;
 
@@ -83,6 +63,27 @@ function listarDataRegistro(req, res) {
         );
 }
 
+
+function listarUsuarios(req, res) {
+    var fkAdmin = req.params.fkAdmin;
+
+    usuarioModel.listarUsuarios(fkAdmin)
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
+        }).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+
 function entrar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
@@ -118,32 +119,50 @@ function entrar(req, res) {
     }
 }
 
+function buscarEmpresa(req, res) {
+    var valorToken = req.params.valorToken;
+    var nomeEmpresa = req.params.nomeEmpresa;
+
+    console.log(`Trazendo as informações da empresa ${nomeEmpresa}`);
+
+    usuarioModel.buscarEmpresa(valorToken, nomeEmpresa).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar empresa", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
 function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nome = req.body.nomeServer;
     var sobrenome = req.body.sobrenomeServer;
-    var nomeEmpresa = req.body.nomeEmpresaServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
-    var valorToken = req.body.valorTokenServer;
+    var fkEmpresa = req.body.fkEmpresaServer;
+    var fkUsuarioAdmin = req.body.fkUsuarioAdminServer;
 
     // Faça as validações dos valores
     if (nome == undefined) {
         res.status(400).send("Seu nome está undefined!");
     } else if (sobrenome == undefined) {
         res.status(400).send("Seu sobrenome está undefined!");
-    } else if (valorToken == undefined) {
-        res.status(400).send("Seu fkEmpresa está undefined!");
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está undefined!");
     } else if (email == undefined) {
         res.status(400).send("Seu email está undefined!");
-    } else if (valorToken == undefined) {
+    } else if (fkEmpresa == undefined) {
         res.status(400).send("Seu fkEmpresa está undefined!");
     } else {
         
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, sobrenome, email, senha, fkEmpresa)
+        usuarioModel.cadastrar(nome, sobrenome, email, senha, fkEmpresa, fkUsuarioAdmin)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -200,6 +219,7 @@ module.exports = {
     listar,
     listarSensores,
     listarDataRegistro,
+    listarUsuarios,
     gerarToken,
     testar
 }

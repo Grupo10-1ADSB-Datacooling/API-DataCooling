@@ -62,14 +62,15 @@ body::-webkit-scrollbar-thumb{
 }
 
 .mensagem-alarme{
-    width: 30vw;
-    height: 20vh;
+    width: 25vw;
+    height: 18vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: none;
-    border-radius: 1vw;
+    border: 1px solid rgba(255, 255, 255 , 0.05);
+    border-radius: 0.5vw;
     background-color: rgba(255, 255, 255 , 0.05);
+    box-shadow: 0px 4px 7px rgba(255, 255, 255 ,0.05);
 }
 
 .mensagem-alarme .informacao{
@@ -83,14 +84,28 @@ body::-webkit-scrollbar-thumb{
     font-family: 'Nunito Sans';
     text-transform: uppercase;
     letter-spacing: 0.08em;
+    line-height: 3.5vh;
     font-weight: 400;
+    font-size: 1.1vw;
 }
 
 .mensagem-alarme .informacao .dados{
-    font-size: 1vw;
+    font-size: 0.9vw;
 }
 .mensagem-alarme .informacao .dados .captura{
     font-weight: 600;
+}
+
+#captura_critico{
+    color: var(--corCritico);
+}
+
+#captura_alerta{
+    color: var(--corAlerta);
+}
+
+#captura_critico{
+    color: var(--corCritico);
 }
 
 #loading{
@@ -117,7 +132,6 @@ header nav{
     padding: 65px 0px 0px 0px;
     width: 15vw;
     height: 100%;
-    /* background-color: #37C1CA; */
     background-color: #161616;
     box-shadow: 0px 0px 15px rgba(255, 255, 255 , 0.05);
     border: 1px solid rgba(255, 255, 255 , 0.05);
@@ -176,16 +190,14 @@ header nav .informations-profile .img-profile a:hover .icon-settings:hover {
 
 header nav .informations-profile .img-profile a .icon-settings i{
     font-size: 1.2vw;
-    /* width: 1vw; */
 }
 
 header nav .informations-profile h3{
     font-size: 1.1vw;
     font-weight: 600;
-    /* color: #40E0D0; */
     color: #40E0D0;
 }
-/* header nav .list-month, .list-setor, .list-navegation{ */
+
 header nav .list-navegation{
     margin-top: 3vh;
     width: 75%;
@@ -196,22 +208,10 @@ header nav .list-navegation{
     row-gap: 2vh;
 }
 
-/* header nav .list-month h3, .list-setor h3{ */
-/* header nav .list-navegation h3{
-    text-transform: capitalize;
-    font-weight: 600;
-    color: black;
-    color: #fff;
-    color: #40E0D0;
-    letter-spacing: 0.03em;
-    font-size: 1vw;
-} */
-
 header nav .list-navegation .list-item, header nav .list-navegation .list-item-now{
     width: 75%;
 }
 
-/* header nav .list-month .list-item, .list-setor .list-item,  */
 header nav .list-navegation .list-item a{
     font-size: 0.8vw;
     font-weight: 300;
@@ -219,16 +219,12 @@ header nav .list-navegation .list-item a{
     transition: 0.5s;
 }
 
-/* header nav .list-month .list-item:hover , .list-setor .list-item:hover */
 header nav .list-navegation .list-item a:hover{ 
     cursor: pointer;
     padding: 5px 10px 5px 10px;
-    /* background-color: rgba(0, 0, 0 , 0.25); */
     background-color: #37C1CA;
     width: 7vw;
-    /* color: black; */
     color: #fff;
-    /* color: #40E0D0; */
     font-weight: 500;
     border: 1px solid rgba(0, 0, 0 , 0.1);
     border-radius: 0.25vw;
@@ -236,16 +232,9 @@ header nav .list-navegation .list-item a:hover{
 }
 
 header nav .list-navegation .list-item-now a{ 
-    /* width: 7vw;
-    background-color: #37C1CA;
-    color: #fff;
-    padding: 5px 10px 5px 10px; */
     font-size: 0.8vw;
     font-weight: 500;
     color: #40E0D0;
-    /* border: 1px solid rgba(0, 0, 0 , 0.1);
-    border-radius: 0.25vw;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0 , 0.1) ; */
 
 }
 
@@ -260,7 +249,6 @@ header nav .logout a{
 
 header nav .logout .logout-button{
     cursor: pointer;
-    /* background-color: #000; */
     background-color: #37C1CA;
     color: white;
     width: 11vw;
@@ -277,7 +265,6 @@ header nav .logout .logout-button{
 
 header nav .logout .logout-button:hover{
     background-color: #000;
-    /* opacity: 0.9; */
 }
 
 .container{
@@ -289,7 +276,6 @@ header nav .logout .logout-button:hover{
 }
 
 .container .nav{
-    /* background-color: #37C1CA; */
     width: 90%;
     height: 10vh;
     display: flex;

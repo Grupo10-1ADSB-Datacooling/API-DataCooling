@@ -1,7 +1,12 @@
 function exibirUsuarioCadastrado() {
-    var fkAdmin = sessionStorage.ID_USUARIO;
+    var fkAdmin = sessionStorage.ID;
 
-    fetch(`/usuario/listarUsuario/${fkAdmin}`, { cache: 'no-store' }).then(function (response) {
+    fetch(`/usuarios/listarUsuarios/${fkAdmin}`,{
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (response) {
         if (response.ok) {
             console.log(response)
             response.json().then(function (resposta) {
@@ -21,6 +26,7 @@ function exibirUsuarioCadastrado() {
 
 function exibirUsuario(resposta){
     var users = document.querySelector('.users');
+    console.log(resposta)
     for(var contadorUsuario = 0; contadorUsuario < resposta.length; contadorUsuario++){
         users.innerHTML +=
         `<div class="card-users">
@@ -28,8 +34,7 @@ function exibirUsuario(resposta){
                 <img class="img-users" src="./../../assets/dadinho_perfil_3.png">
             </div>
             <span class="name-user">
-                <h4 id="nameUser"> ${nome} ${sobrenome} </h4>
-                <h5> ${email} </h5>
+                <h4 id="nameUser"> ${resposta[contadorUsuario].nome} ${resposta[contadorUsuario].sobrenome} </h4>
             </span>
         </div>`;
     }

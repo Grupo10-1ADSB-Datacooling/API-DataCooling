@@ -37,7 +37,7 @@ var limites_umidade = {
 
 function obterSensores() {
 
-    var idEmpresaVar = sessionStorage.ID;
+    var idEmpresaVar = sessionStorage.FK_EMPRESA;
 
     console.log("Id da Empresa: ", idEmpresaVar);
 
@@ -267,7 +267,7 @@ function alertar(resposta, nomeSetor) {
     }
     else if (temp < limites_temperatura.quente && temp > limites_temperatura.frio) {
         classe_temperatura = 'ideal';
-        removerAlerta(idSensor);
+        removerAlerta(idSensor, 'temperatura');
     }
     else if (temp <= limites_temperatura.frio && temp > limites_temperatura.muito_frio) {
         grauDeAvisoTemperatura = 'alerta frio'
@@ -292,7 +292,7 @@ function alertar(resposta, nomeSetor) {
     }
     else if (umid < limites_umidade.umido && umid > limites_umidade.seco) {
         classe_umidade = 'ideal';
-        removerAlerta(idSensor);
+        removerAlerta(idSensor, 'umidade');
     }
     else if (umid <= limites_umidade.seco && umid > limites_umidade.muito_seco) {
         grauDeAvisoUmidade = 'alerta seco'
@@ -320,7 +320,7 @@ function exibirAlertaTemperatura(temp, idSensor, nomeSetor, grauDeAvisoTemperatu
 
 }
 
-// alerta Umidade
+// Alerta Umidade
 function exibirAlertaUmidade(umid, idSensor, nomeSetor, grauDeAvisoUmidade, grauDeAvisoCor) {
     var indice = alertasUmidade.findIndex(item => item.idSensor == idSensor);
 
@@ -334,9 +334,13 @@ function exibirAlertaUmidade(umid, idSensor, nomeSetor, grauDeAvisoUmidade, grau
 
 }
 
-function removerAlerta(idSensor) {
-    alertasTemperatura = alertasTemperatura.filter(item => item.idSensor != idSensor);
-    alertasUmidade = alertasUmidade.filter(item => item.idSensor != idSensor);
+function removerAlerta(idSensor, tipo) {
+    if(tipo == 'temperatura'){
+        alertasTemperatura = alertasTemperatura.filter(item => item.idSensor != idSensor);
+    } else {
+        alertasUmidade = alertasUmidade.filter(item => item.idSensor != idSensor);
+    }
+
     exibirCards();
 }
 
@@ -365,8 +369,8 @@ function transformarEmDivTemperatura({idSensor, nomeSetor, temp, grauDeAvisoTemp
                     </label>
                     sensor ${idSensor} -->
                 </div> 
-                <h4 id="${grauDeAvisoCor}" class="texto">${nomeSetor} está em estado de ${grauDeAvisoTemperatura}!</h4>
-                <div class="dados"> Temperatura: <span class="captura"> ${temp}°C </span> </div>   
+                <h4 id="${grauDeAvisoCor}" class="texto" >${nomeSetor} está em estado de ${grauDeAvisoTemperatura}!</h4>
+                <div class="dados"> Temperatura: <span class="captura" id="captura_${grauDeAvisoCor}"> ${temp}°C </span> </div>   
             </div>
         </div>`;
 }
@@ -381,7 +385,7 @@ function transformarEmDivUmidade({idSensor, nomeSetor, umid, grauDeAvisoUmidade,
                     </label>
                     sensor ${idSensor} </small> -->
                     <h4 id="${grauDeAvisoCor}">${nomeSetor} está em estado de ${grauDeAvisoUmidade}!</h4>
-                    <div class="dados"> Umidade: <span class="captura"> ${umid}% </span> 
+                    <div class="dados"> Umidade: <span class="captura" id="captura_${grauDeAvisoCor}"> ${umid}% </span> 
                     </div>   
             </div>
         </div>`;

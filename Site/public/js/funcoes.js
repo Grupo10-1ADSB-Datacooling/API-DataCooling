@@ -2,19 +2,22 @@
 function validarSessao() {
     // aguardar();
 
+    var id = sessionStorage.ID;
+    var fkAdmin = sessionStorage.FK_ADMIN;
     var nome = sessionStorage.NOME;
     var sobrenome = sessionStorage.SOBRENOME;
-    var email = sessionStorage.EMAIL;
-    var nomeEmpresa = sessionStorage.NOME_EMPRESA;
-
     var nomeUsuario = document.getElementById("nomeUsuario");
 
-    if (email != null && nome != null) {
+    if (sobrenome != null && nome != null) {
         // window.alert(`Seja bem-vindo, ${nome}!`);
+
+        
+        if(id != fkAdmin){
+            document.getElementById('meusUsuarios').innerHTML = "";
+        }
         
         nomeUsuario.innerHTML = `${nome} ${sobrenome}`;
-        emailUsuario.innerHTML = email;
-        nomeEmpresa.innerHTML = nome;
+
         finalizarAguardar();
     } else {
         window.location = "../login.html";

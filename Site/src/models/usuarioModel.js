@@ -14,7 +14,8 @@ function listarUsuarios(idAdmin){
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarUsuarios()" + idAdmin);
     var instrucao = `
         SELECT * FROM Usuario 
-        WHERE fkUsuarioAdmin = ${idAdmin};
+            WHERE fkUsuarioAdmin = ${idAdmin}
+                ORDER BY nome;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -36,6 +37,7 @@ function listarDataRegistro(idEmpresa, idSensor){
         JOIN Sensor ON dadosSensor.fkSensor = Sensor.idSensor
             JOIN Setor ON Sensor.fkSetor = Setor.idSetor
                 WHERE Setor.fkEmpresa = ${idEmpresa} AND Sensor.idSensor = ${idSensor}
+                    GROUP BY dataFormatada
                    ORDER BY dataFormatada DESC;`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -45,22 +47,23 @@ function listarDataRegistro(idEmpresa, idSensor){
 function entrar(email, senha) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
     var instrucao = `
-        SELECT * FROM Usuario 
-            JOIN Empresa ON Usuario.fkEmpresa = Empresa.idEmpresa
-                WHERE email = '${email}' AND senha = '${senha}';
+        SELECT User.idUsuario, User.nome, User.sobrenome, User.email, User.fkEmpresa, User.fkUsuarioAdmin, Admin.nome nomeAdmin, Admin.sobrenome sobrenomeAdmin, razaoSocial FROM Usuario AS User
+            LEFT JOIN Usuario AS Admin ON User.fkUsuarioAdmin = Admin.idUsuario
+                JOIN Empresa ON user.fkEmpresa = Empresa.idEmpresa
+                    WHERE User.email = '${email}' AND User.senha = '${senha}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucao
-function cadastrar(nome, sobrenome, email, senha, fkEmpresa) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, sobrenome, email, senha, fkEmpresa);
+function cadastrar(nome, sobrenome, email, senha, fkEmpresa, fkUsuarioAdmin) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, sobrenome, email, senha, fkEmpresa, fkUsuarioAdmin);
     
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-        INSERT INTO Usuario (nome, sobrenome, email, senha, fkEmpresa) VALUES ('${nome}','${sobrenome}','${email}','${senha}', ${fkEmpresa});
+        INSERT INTO Usuario (nome, sobrenome, email, senha, fkEmpresa, fkUsuarioAdmin) VALUES ('${nome}','${sobrenome}','${email}','${senha}', ${fkEmpresa}, ${fkUsuarioAdmin});
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -82,10 +85,13 @@ function buscarEmpresa(token, nomeEmpresa){
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function buscarEmpresa():", token);
     
     var instrucao = `
-        SELECT fkEmpresa FROM Token
-        JOIN Empresa ON Empresa.idEmpresa = Token.fkEmpresa
-        WHERE valor = '${token}' AND razaoSocial = '${nomeEmpresa}' ;
+        SELECT Token.fkEmpresa, idUsuario FROM Token
+            JOIN Empresa ON Empresa.idEmpresa = Token.fkEmpresa
+                JOIN Usuario ON Empresa.idEmpresa = Usuario.fkEmpresa
+                    WHERE valor = '${token}' AND razaoSocial = '${nomeEmpresa}'
+                        ORDER BY idUsuario LIMIT 1;
     `;
+
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao)
 }

@@ -6,29 +6,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./../assets/logo_datacooling.png" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://kit.fontawesome.com/2780876011.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-    <script src="./../funcoes.js"></script>
+    <script src="./../js/funcoes.js"></script>
     <script src="./js/script.js"></script>
     <script src="./js/loading.js"></script>
     <title> Meus Sensores - DataCooling </title>
 </head>
 
-<body onload="exibirLoader(1200, './../loading.css', './../assets/datacooling.png'), obterSensores()">
+<body onload="exibirLoader(1200), obterSensores()">
     <header>
         <nav>
             <div class="informations-profile">
                 <div class="img-profile">
-                    <img class="img-client" src="./../assets/kleber.png">
-                    <a href="#">
+                    <img class="img-client" src="./../assets/dadinho_perfil.png">
+                    <!-- <a href="#">
                         <button class="icon-settings">
                             <label class="icon">
                                 <i class="fa-solid fa-camera"></i>
                             </label>
                         </button>
-                    </a>
+                    </a> -->
                 </div>
                 <h3 id="nomeUsuario"> </h3>
             </div>
@@ -48,7 +48,7 @@
                         Meus dados
                     </a>
                 </li>
-                <li class="list-item">
+                <li class="list-item" id="meusUsuarios">
                     <a href="./meusUsuarios.html">
                         Meus usuários
                     </a>

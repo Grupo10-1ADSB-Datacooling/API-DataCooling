@@ -109,13 +109,12 @@
 		(null, 1, 'jfgo95ugi3u98htuh983y9fn949hv3', '2023-05-23 10:37:38'),
 		(null, 2, 'ibgtio894u8goneh984uoin09490k0', '2023-05-30 18:49:12'),
 		(null, 3, '3iuhguibiu4i839hngon83u8ngois2', '2023-05-27 19:12:53');
-        
-        
+                
 -- EXIBINDO OS REGISTROS DA TABELA TOKEN
 	
     SELECT * FROM Token;
     
--- TABELA DE PERFIS DA EMPRESA
+-- TABELA DE USUÁRIO DA EMPRESA
 
 	CREATE TABLE Usuario (
 	idUsuario INT AUTO_INCREMENT,
@@ -137,6 +136,10 @@
 		(null, 1, 'Elena', 'Kalika', 'admin@elena.datacenter.', 'LeiteComMangaNaoFazMal', null),
 		(null, 2, 'Luíza', 'Venoza', 'admin@luiza.datacenter', 'SalonLine', null),
 		(null, 3, 'Kleber', 'Bambam', 'admin@bambam.datacenter', '#Kb0123', null);
+        
+	UPDATE Usuario SET fkUsuarioAdmin = 1 WHERE idUsuario = 1;
+	UPDATE Usuario SET fkUsuarioAdmin = 2 WHERE idUsuario = 2;
+	UPDATE Usuario SET fkUsuarioAdmin = 3 WHERE idUsuario = 3;
         
 -- INSERÇÃO DE USUÁRIOS NORMAIS NA TABELA DE USUÁRIO
 
@@ -245,8 +248,10 @@
 		('2023-06-02 12:21:22', 110, null, null);
         
 	INSERT INTO dadosSensor VALUES
-		(now(), 107, 25, 50);
-			
+		(now(), 110, 28, 50);
+                
+        UPDATE Usuario SET fkUsuarioAdmin = 3 WHERE idUsuario = 10;
+            
 -- EXIBINDO OS DADOS DA TABELA DE DADOS_SENSOR
 
 	SELECT * FROM dadosSensor;
@@ -353,4 +358,4 @@
 	SELECT * FROM Sensor
 		JOIN Setor ON Sensor.fkSetor = Setor.idSetor
 			JOIN dadosSensor ON dadosSensor.fkSensor = Sensor.idSensor;
-		
+            

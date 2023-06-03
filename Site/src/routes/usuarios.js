@@ -11,13 +11,11 @@ router.get("/listar", function (req, res) {
     usuarioController.listar(req, res);
 });
 
-
-router.get("/listarUsuarios", function (req, res) {
+router.get("/listarUsuarios/:fkAdmin", function (req, res) {
     usuarioController.listarUsuarios(req, res);
 });
 
-
-router.get("/buscarEmpresa", function (req, res) {
+router.get("/buscarEmpresa/:valorToken/:nomeEmpresa", function (req, res) {
     usuarioController.buscarEmpresa(req, res);
 });
 

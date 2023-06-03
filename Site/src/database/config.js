@@ -18,19 +18,19 @@ var sql = require('mssql');
 } */
 
 // CONEXÃO DO MYSQL WORKBENCH (LOCAL)
-var mySqlConfig = {
-    host: "localhost",
-    database: "DataCooling1",
-    user: "root",
-    password: "Batata#1",
-};
-
 // var mySqlConfig = {
 //     host: "localhost",
-//     database: "datacooling",
-//     user: "datacooling",
-//     password: "Dadinho3901",
+//     database: "DataCooling1",
+//     user: "root",
+//     password: "Batata#1",
 // };
+
+var mySqlConfig = {
+    host: "localhost",
+    database: "datacooling1",
+    user: "root",
+    password: "",
+};
 
 function executar(instrucao) {
     // VERIFICA A VARIÁVEL DE AMBIENTE SETADA EM app.js

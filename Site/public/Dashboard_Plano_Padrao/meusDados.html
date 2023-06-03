@@ -5,34 +5,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="styleMeusDados.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/styleMeusDados.css">
     <link rel="shortcut icon" href="./../assets/logo_datacooling.png" type="image/x-icon">
     <script src="https://kit.fontawesome.com/2780876011.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- <script src="./../funcoes.js"></script> -->
+    <script src="./../js/funcoes.js"></script>
     <script src="./js/loading.js"></script>
     <script src="./js/scriptMeusDados.js"></script>
     <!-- <script src="./../../funcoes.js"></script> -->
     <title> Meus Dados - DataCooling </title>
 </head>
 
-<body onload="exibirLoader(500, './../loading.css', './../assets/datacooling.png')">
+<body onload="exibirLoader(500), exibirDados()">
     <header>
         <nav>
             <div class="informations-profile">
                 <div class="img-profile">
                     <img class="img-client" src="./../assets/kleber.png">
-                    <a href="#">
+                    <!-- <a href="#">
                         <button class="icon-settings">
                             <label class="icon">
                                 <i class="fa-solid fa-camera"></i>
                             </label>
                         </button>
-                    </a>
+                    </a> -->
                 </div>
-                <h3 id="razaoSocial"> </h3>
+                <h3 id="nomeUsuario"> </h3>
             </div>
             <ul class="list-navegation">
                 <li class="list-item">
@@ -50,7 +50,7 @@
                         Meus dados
                     </a>
                 </li>
-                <li class="list-item">
+                <li class="list-item" id="meusUsuarios">
                     <a href="./meusUsuarios.html">
                         Meus usuários
                     </a>
@@ -75,7 +75,7 @@
         <div class="content">
             <div class="informations">
                 <h1 class="informations-title"> Meus dados </h1>
-                <a href="editarDados.html">
+                <!-- <a href="editarDados.html">
                     <button class="btn-add">
                         <label class="icon">
                             <i class="fa-solid fa-pen"></i>
@@ -84,37 +84,33 @@
                             Editar
                         </span>
                     </button>
-                </a>
+                </a> -->
             </div>
             <div class="data-client">
                 <ul class="list-data-client">
                     <li class="list-item">
-                        <h4 class="title-data"> Nome do Responsável: </h4>
-                        <h4 class="subtitle-data"> Kleber Bambam </h4>
+                        <h4 class="title-data"> ID do Usuário: </h4>
+                        <h4 class="subtitle-data" id="idUsuario"> </h4>
                     </li>
                     <li class="list-item">
-                        <h4 class="title-data"> Razão Social da Empresa: </h4>
-                        <h4 class="subtitle-data" id="razaoSocialEmpresa"> </h4>
+                        <h4 class="title-data"> Nome: </h4>
+                        <h4 class="subtitle-data" id="nomeUser"> </h4>
                     </li>
                     <li class="list-item">
-                        <h4 class="title-data"> Plano: </h4>
-                        <h4 class="subtitle-data" id="plano"> </h4>
+                        <h4 class="title-data"> Sobrenome: </h4>
+                        <h4 class="subtitle-data" id="sobrenomeUsuario"> </h4>
                     </li>
                     <li class="list-item">
                         <h4 class="title-data"> Email: </h4>
-                        <h4 class="subtitle-data" id="email"> </h4>
+                        <h4 class="subtitle-data" id="emailUsuario"> </h4>
                     </li>
                     <li class="list-item">
-                        <h4 class="title-data"> CNPJ: </h4>
-                        <h4 class="subtitle-data" id="cnpj"> </h4>
+                        <h4 class="title-data"> Nome da Empresa: </h4>
+                        <h4 class="subtitle-data" id="nomeEmpresa"> </h4>
                     </li>
-                    <li class="list-item">
-                        <h4 class="title-data"> CEP: </h4>
-                        <h4 class="subtitle-data" id="cep"> </h4>
-                    </li>
-                    <li class="list-item">
-                        <h4 class="title-data"> Telefone Fixo: </h4>
-                        <h4 class="subtitle-data" id="telFixo"> </h4>
+                    <li class="list-item" id="dadosResponsavelEmpresa">
+                        <h4 class="title-data"> Responsável pela Empresa: </h4>
+                        <h4 class="subtitle-data" id="responsavelEmpresa"> </h4>
                     </li>
                 </ul>
             </div>

@@ -31,7 +31,7 @@ function obterDadosGraficos() {
             <div class="donut">
             <div class="donut-chart">
                 <div class="title">
-                    <h4> Média da Temperatura</h4>
+                    <h4> Mediana da Temperatura de Hoje</h4>
                 </div>
                 <div class="chart">
                     <canvas class="chart-item" id="chartMediaTemperature"></canvas>
@@ -39,7 +39,7 @@ function obterDadosGraficos() {
             </div>
             <div class="donut-chart">
                 <div class="title">
-                    <h4> Média da Umidade</h4>
+                    <h4> Mediana da Umidade de Hoje</h4>
                 </div>
                 <div class="chart">
                     <canvas class="chart-item" id="chartMediaHumidity"></canvas>

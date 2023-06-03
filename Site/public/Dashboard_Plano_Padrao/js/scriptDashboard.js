@@ -1,11 +1,8 @@
+var idEmpresaVar = sessionStorage.FK_EMPRESA;
+
 function listarSensores() {
-
-    var idEmpresaVar = sessionStorage.ID;
-
-    console.log("Id da Empresa: ", idEmpresaVar);
     select_sensor.innerHTML = "";
     
-
     fetch("/usuarios/listarSensores", {
         method: "POST",
         headers: {
@@ -27,12 +24,6 @@ function listarSensores() {
                 json.forEach(sensor => {
                     select_sensor.innerHTML += `<option value="${sensor.idSensor}" onclick="obterDadosGrafico(sensor.idSensor)"> Sensor ${sensor.idSensor} </option>`
                 })
-
-                
-                // setTimeout(function () {
-                //     window.location = "./dashboard/cards.html";
-                // }, 1000); // apenas para exibir o loading
-
             });
 
         } else {
@@ -53,14 +44,11 @@ function listarSensores() {
 }
 
 function listarDataRegistro() {
-
-    var idEmpresaVar = sessionStorage.ID;
     var idSensorVar = Number(select_sensor.value);
     select_data.innerHTML = "";
 
     console.log("Id da Empresa: ", idEmpresaVar);
     
-
     fetch("/usuarios/listarDataRegistro", {
         method: "POST",
         headers: {
