@@ -181,6 +181,26 @@ function cadastrar(req, res) {
 }
 
 
+function listarToken(req, res) {
+    var fkEmpresa = req.params.fkEmpresa;
+
+    console.log(`Trazendo o token da empresa ${fkEmpresa}`);
+
+    usuarioModel.listarToken(fkEmpresa).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao listar token", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
 function gerarToken(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var valorToken = req.body.valorServer;
@@ -212,6 +232,34 @@ function gerarToken(req, res) {
     }
 }
 
+function excluirToken(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var fkEmpresa = req.params.fkEmpresa;
+
+    // Faça as validações dos valores
+    if (fkEmpresa == undefined) {
+        res.status(400).send("Seu fkEmpresa está undefined!");
+    } else {
+        
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.excluirToken(fkEmpresa)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao tentar excluir token! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 module.exports = {
     entrar,
     cadastrar,
@@ -220,6 +268,8 @@ module.exports = {
     listarSensores,
     listarDataRegistro,
     listarUsuarios,
+    listarToken,
     gerarToken,
+    excluirToken,
     testar
 }

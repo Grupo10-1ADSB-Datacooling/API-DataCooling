@@ -12,7 +12,7 @@ function validarSessao() {
         // window.alert(`Seja bem-vindo, ${nome}!`);
 
         
-        if(id != fkAdmin){
+        if(fkAdmin != 'null'){
             document.getElementById('meusUsuarios').innerHTML = "";
         }
         

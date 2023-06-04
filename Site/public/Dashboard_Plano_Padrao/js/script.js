@@ -267,7 +267,7 @@ function alertar(resposta, nomeSetor) {
     }
     else if (temp < limites_temperatura.quente && temp > limites_temperatura.frio) {
         classe_temperatura = 'ideal';
-        removerAlerta(idSensor, 'temperatura');
+        removerAlertaTemperatura(idSensor);
     }
     else if (temp <= limites_temperatura.frio && temp > limites_temperatura.muito_frio) {
         grauDeAvisoTemperatura = 'alerta frio'
@@ -292,7 +292,7 @@ function alertar(resposta, nomeSetor) {
     }
     else if (umid < limites_umidade.umido && umid > limites_umidade.seco) {
         classe_umidade = 'ideal';
-        removerAlerta(idSensor, 'umidade');
+        removerAlertaUmidade(idSensor);
     }
     else if (umid <= limites_umidade.seco && umid > limites_umidade.muito_seco) {
         grauDeAvisoUmidade = 'alerta seco'
@@ -334,12 +334,14 @@ function exibirAlertaUmidade(umid, idSensor, nomeSetor, grauDeAvisoUmidade, grau
 
 }
 
-function removerAlerta(idSensor, tipo) {
-    if(tipo == 'temperatura'){
-        alertasTemperatura = alertasTemperatura.filter(item => item.idSensor != idSensor);
-    } else {
-        alertasUmidade = alertasUmidade.filter(item => item.idSensor != idSensor);
-    }
+function removerAlertaTemperatura(idSensor) {
+    alertasTemperatura = alertasTemperatura.filter(item => item.idSensor != idSensor);
+
+    exibirCards();
+}
+
+function removerAlertaUmidade(idSensor) {
+    alertasUmidade = alertasUmidade.filter(item => item.idSensor != idSensor);
 
     exibirCards();
 }
@@ -361,22 +363,25 @@ function exibirCards() {
 
 function transformarEmDivTemperatura({idSensor, nomeSetor, temp, grauDeAvisoTemperatura, grauDeAvisoCor }) {
     return `
-        <div class="mensagem-alarme">
-            <div class="informacao">
-                <div class="sensor${idSensor}">
-                <!-- <label class="ball">
-                    &bull;
-                    </label>
-                    sensor ${idSensor} -->
-                </div> 
-                <h4 id="${grauDeAvisoCor}" class="texto" >${nomeSetor} está em estado de ${grauDeAvisoTemperatura}!</h4>
-                <div class="dados"> Temperatura: <span class="captura" id="captura_${grauDeAvisoCor}"> ${temp}°C </span> </div>   
+        <a href="#card_sensor${idSensor}">
+            <div class="mensagem-alarme">
+                <div class="informacao">
+                    <div class="sensor${idSensor}">
+                    <!-- <label class="ball">
+                        &bull;
+                        </label>
+                        sensor ${idSensor} -->
+                    </div> 
+                    <h4 id="${grauDeAvisoCor}" class="texto" >${nomeSetor} está em estado de ${grauDeAvisoTemperatura}!</h4>
+                    <div class="dados"> Temperatura: <span class="captura" id="captura_${grauDeAvisoCor}"> ${temp}°C </span> </div>   
+                </div>
             </div>
-        </div>`;
+        </a>`;
 }
 
 function transformarEmDivUmidade({idSensor, nomeSetor, umid, grauDeAvisoUmidade, grauDeAvisoCor }) {
     return `
+    <a href="#card_sensor${idSensor}">
         <div class="mensagem-alarme">
             <div class="informacao">
                <!-- <small class="div_${grauDeAvisoCor}">
@@ -388,5 +393,6 @@ function transformarEmDivUmidade({idSensor, nomeSetor, umid, grauDeAvisoUmidade,
                     <div class="dados"> Umidade: <span class="captura" id="captura_${grauDeAvisoCor}"> ${umid}% </span> 
                     </div>   
             </div>
-        </div>`;
+        </div>
+    </a>`;
 }

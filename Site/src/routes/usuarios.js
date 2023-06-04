@@ -19,6 +19,10 @@ router.get("/buscarEmpresa/:valorToken/:nomeEmpresa", function (req, res) {
     usuarioController.buscarEmpresa(req, res);
 });
 
+router.get("/listarToken/:fkEmpresa/", function (req, res) {
+    usuarioController.listarToken(req, res);
+});
+
 //Recebendo os dados do html e direcionando para a função cadastrar de usuarioController.js
 router.post("/cadastrar", function (req, res) {
     usuarioController.cadastrar(req, res);
@@ -38,6 +42,10 @@ router.post("/listarDataRegistro", function (req, res) {
 
 router.post("/gerarToken", function (req, res) {
     usuarioController.gerarToken(req, res);
+});
+
+router.delete("/excluirToken/:fkEmpresa", function (req, res) {
+    usuarioController.excluirToken(req, res);
 });
 
 module.exports = router;

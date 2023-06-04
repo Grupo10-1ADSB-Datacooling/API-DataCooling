@@ -69,12 +69,36 @@ function cadastrar(nome, sobrenome, email, senha, fkEmpresa, fkUsuarioAdmin) {
     return database.executar(instrucao);
 }
 
+function listarToken(fkEmpresa){
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarToken():", fkEmpresa);
+
+    var instrucao = `       
+        SELECT valor FROM Token WHERE fkEmpresa = ${fkEmpresa};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+
+}
+
+
 function gerarToken(token, fkEmpresa){
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function gerarToken():", token, fkEmpresa);
 
     var instrucao = `       
         INSERT INTO Token (valor, fkEmpresa, dtCriacao) VALUES ('${token}', ${fkEmpresa}, now());
 
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+
+}
+
+
+function excluirToken(fkEmpresa){
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function excluirToken():", fkEmpresa);
+
+    var instrucao = `       
+        DELETE FROM Token WHERE fkEmpresa = ${fkEmpresa};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -103,6 +127,8 @@ module.exports = {
     listarUsuarios,
     listarSensores,
     listarDataRegistro,
-    gerarToken
+    listarToken,
+    gerarToken,
+    excluirToken
     
 };

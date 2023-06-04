@@ -1,5 +1,7 @@
+var fkEmpresa = sessionStorage.FK_EMPRESA;
+var fkAdmin = sessionStorage.ID;
+
 function exibirUsuarioCadastrado() {
-    var fkAdmin = sessionStorage.ID;
 
     fetch(`/usuarios/listarUsuarios/${fkAdmin}`,{
         method: "GET",
@@ -27,7 +29,7 @@ function exibirUsuarioCadastrado() {
 function exibirUsuario(resposta){
     var users = document.querySelector('.users');
     console.log(resposta)
-    for(var contadorUsuario = 0; contadorUsuario < resposta.length; contadorUsuario++){
+    for(var contadorUsuario = (resposta.length - 1); contadorUsuario >= 0; contadorUsuario--){
         users.innerHTML +=
         `<div class="card-users">
             <div class="profile">
@@ -41,7 +43,6 @@ function exibirUsuario(resposta){
 }
 
 function gerarStringAleatoria() {
-    var fkEmpresa = sessionStorage.FK_EMPRESA;
     var valorToken = '';
     var caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
@@ -65,18 +66,44 @@ function gerarStringAleatoria() {
         console.log("resposta: ", resposta);
         
         if (resposta.ok) {
-            mensagem.innerHTML = `<input id="a" value="${valorToken}" style="width: 38vh;" readonly class="ipt_token">`
+            mensagem.innerHTML = `<input id="a" value="${valorToken}" style="width: 38vh;" readonly class="ipt_token"> <div id="mensagem_copiar"></div>`
             btn_copiar.innerHTML = `<button onclick="copiar()" class="copy_bnt" readonly >Copiar</button>`
+            alert('Você possui 30 minutos para utilizar o token, após esse tempo ele será excluído!')
             
+            setTimeout(excluirToken, 180 * 1000);
+
         } else {
+            if(resposta.status == 500){
+                fetch(`/usuarios/listarToken/${fkEmpresa}`,{
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }).then(function (response) {
+                    if (response.ok) {
+                        console.log(response)
+                        response.json().then(function (resposta) {
+                            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                            resposta.reverse();
+                            alert(`Você já possui o token ${resposta[0].valor} ativo, aguarde o tempo de exclusão para criar outro!`);
+                        });
+                    } else {
+                        console.error('Nenhum dado encontrado ou erro na API');
+                    }
+                })
+                    .catch(function (error) {
+                        console.error(`Erro na obtenção dos dados do token: ${error.message}`);
+                    });
+            }
+
             throw ("Houve um erro ao tentar gerar um token!");
         }
     }).catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
+
         finalizarAguardar();
     });
 
-    return false;
 
 }
 
@@ -84,6 +111,34 @@ function copiar() {
     var b = document.getElementById("a").select();
     if (!(document.execCommand("paste"))) {
         document.execCommand("copy")
-        mensagem.innerHTML += `<br><span style="color: #0bcd4d;">Token copiado.</span>`
+        mensagem_copiar.innerHTML = `<br><span style="color: #0bcd4d;">Token copiado.</span>`
     }
 }
+
+function excluirToken(){
+    fetch(`../usuarios/excluirToken/${fkEmpresa}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (resposta) {
+
+        if (resposta.ok) {
+            alert("Agora você já pode criar outro token!");
+            mensagem.innerHTML = ""
+            btn_copiar.innerHTML = "";
+            mensagem_copiar.innerHTML = "";
+
+        } else if (resposta.status == 404) {
+            window.alert("Deu 404!");
+        } else {
+            throw ("Houve um erro ao tentar deletar o token! Código da resposta: " + resposta.status);
+        }
+    }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+    });
+
+    return false;
+
+}
+

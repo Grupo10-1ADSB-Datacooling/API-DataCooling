@@ -65,7 +65,7 @@ function buscarEmpresa(token, nomeEmpresa){
                     finalizarCadastro(dadosEmpresa[0].fkEmpresa, dadosEmpresa[0].idUsuario);
                 });
             } else {
-                alert('Nao existe empresa com esses dados');
+                alert('Dados da empresa inválidos, tente novamente!');
             }
         } else {
             throw ("Houve um erro ao tentar buscar a empresa!");

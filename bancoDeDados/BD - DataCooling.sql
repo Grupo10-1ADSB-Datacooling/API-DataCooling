@@ -127,6 +127,7 @@
 	CONSTRAINT fkEmpresaUsuario FOREIGN KEY (fkEmpresa) REFERENCES Empresa(idEmpresa), -- FOREIGN KEY PARA IDENTIFICAR A EMPRESA QUE POSSUI O USUÁRIO
 	CONSTRAINT fkUsuarioAdmin FOREIGN KEY (fkUsuarioAdmin) REFERENCES Usuario(idUsuario), -- FOREIGN KEY PARA IDENTIFICAR QUEM É O USUÁRIO ADMIN
 	CONSTRAINT pkCompostaUsuario PRIMARY KEY (idUsuario, fkEmpresa), -- PRIMARY KEY COMPOSTA DOS CAMPOS FK_EMPRESA E ID_USUARIO
+    CONSTRAINT chkEmail CHECK (email LIKE '%@%'),
     UNIQUE KEY (email)
 	);
 
@@ -137,9 +138,9 @@
 		(null, 2, 'Luíza', 'Venoza', 'admin@luiza.datacenter', 'SalonLine', null),
 		(null, 3, 'Kleber', 'Bambam', 'admin@bambam.datacenter', '#Kb0123', null);
         
-	UPDATE Usuario SET fkUsuarioAdmin = 1 WHERE idUsuario = 1;
-	UPDATE Usuario SET fkUsuarioAdmin = 2 WHERE idUsuario = 2;
-	UPDATE Usuario SET fkUsuarioAdmin = 3 WHERE idUsuario = 3;
+	UPDATE Usuario SET fkUsuarioAdmin = null WHERE idUsuario = 1;
+	UPDATE Usuario SET fkUsuarioAdmin = null WHERE idUsuario = 2;
+	UPDATE Usuario SET fkUsuarioAdmin = null WHERE idUsuario = 3;
         
 -- INSERÇÃO DE USUÁRIOS NORMAIS NA TABELA DE USUÁRIO
 
@@ -248,9 +249,7 @@
 		('2023-06-02 12:21:22', 110, null, null);
         
 	INSERT INTO dadosSensor VALUES
-		(now(), 110, 28, 50);
-                
-        UPDATE Usuario SET fkUsuarioAdmin = 3 WHERE idUsuario = 10;
+		(now(), 110, 100, 100);
             
 -- EXIBINDO OS DADOS DA TABELA DE DADOS_SENSOR
 
