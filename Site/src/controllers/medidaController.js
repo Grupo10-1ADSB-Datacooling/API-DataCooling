@@ -1,4 +1,6 @@
 var medidaModel = require("../models/medidaModel");
+var {enviar} = require("../models/sendEmail");
+ 
 
 function buscarUltimasMedidas(req, res) {
 
@@ -26,11 +28,24 @@ function buscarUltimasMedidas(req, res) {
 function buscarMedidasEmTempoReal(req, res) {
 
     var idSensor = req.params.idSensor;
+    var idUsuario = req.params.idUsuario;
 
     console.log(`Recuperando medidas em tempo real`);
 
-    medidaModel.buscarMedidasEmTempoReal(idSensor).then(function (resultado) {
+    medidaModel.buscarMedidasEmTempoReal(idSensor, idUsuario).then(function (resultado) {
+
         if (resultado.length > 0) {
+            var temperatura = resultado[0].temperatura;
+            var umidade = resultado[0].umidade; 
+            var email = resultado[0].email;
+            var nome = resultado[0].nomeUsuario;
+            
+            if( temperatura >= 28){
+                enviar(email, nome, 'temperatura', temperatura + "°C");
+            }
+            if(umidade >= 56){
+                enviar(email, nome, 'umidade', umidade + "%");
+            }
             res.status(200).json(resultado);
         } else {
             res.status(204).send("Nenhum resultado encontrado!")

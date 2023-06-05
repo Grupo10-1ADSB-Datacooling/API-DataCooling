@@ -187,8 +187,9 @@ function plotarGrafico(resposta, idSensor, dataRegistro) {
 //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
 //     Para ajustar o "select", ajuste o comando sql em src/models
 function atualizarGrafico(idSensor, dadosTemperatura, dadosUmidade, chartTemperatura, chartUmidade) {
+    var idUsuario = sessionStorage.ID;
 
-    fetch(`/medidas/tempo-real/${idSensor}`, { cache: 'no-store' }).then(function (response) {
+    fetch(`/medidas/tempo-real/${idSensor}/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (novoRegistro) {
 

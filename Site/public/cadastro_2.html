@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/styleCadastro.css">
+    <link rel="icon" type="image/png" href="./assets/logo_datacooling.png">
     <title> Cadastro - DataCooling</title>
     <script src="./js/funcoes.js"></script>
     <script src="./js/scriptCadastro.js"></script>
@@ -40,7 +41,10 @@
                         <div class="form-item">
                             <h4 class="form-title"> Senha </h4>
                             <input class="form-input" id="ipt_senha" type="password" placeholder="Sua senha">
-                            <input type="checkbox" onclick="mostrarOcultarSenha()"> <span>Mostrar senha</span>
+                            <div class="checkbox">
+                            <input type="checkbox" class="caixinha" onclick="mostrarOcultarSenha()"> 
+                            <span class="font-checkbox">Mostrar senha</span>
+                            </div>
                         </div>
                         <!-- <div class="form-item">
                             <h4 class="form-title" id="titleCep"> Cargo </h4>
@@ -54,7 +58,7 @@
                         </div>
                     </div>
                     <div class="redirect">
-                        Já possui uma conta? <a href="login.html"> Entrar </a>
+                        Já possui uma conta? <a href="./login.html"> Entrar </a>
                     </div>
                 </div>
             </div>
@@ -68,3 +72,4 @@
 </body>
 
 </html>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

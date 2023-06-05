@@ -56,6 +56,8 @@
     CONSTRAINT chkNome CHECK (nome IN ('Basic', 'Padrão', 'Premium'))
     );
 
+drop table Plano;
+
 -- INSERÇÃO DE REGISTROS NA TABELA PLANO
 
 	INSERT INTO Plano VALUES
@@ -75,17 +77,15 @@
 	cnpj CHAR(14) NOT NULL UNIQUE,
 	telFixo CHAR(14),
 	cep CHAR(9) NOT NULL,
-    numero INT NOT NULL,
-    fkPlano INT,
-    CONSTRAINT fkPlanoEmpresa FOREIGN KEY (fkPlano) REFERENCES Plano(idPlano)
+    numero INT NOT NULL
 	);
         
 -- INSERÇÃO DE REGISTROS NA TABELA DE EMPRESA
 
 	INSERT INTO Empresa VALUES
-		(null, 'Elena Datacenter', '01234567890003', null, '08594003', 1200, 1),
-		(null, 'Luiza Datacenter', '08924567895783', null, '03891003', 875, 3),
-		(null, 'Bambam Datacenter', '01234590174838', null, '05898403', 478, 2);
+		(null, 'Elena Datacenter', '01234567890003', null, '08594003', 1200),
+		(null, 'Luiza Datacenter', '08924567895783', null, '03891003', 875),
+		(null, 'Bambam Datacenter', '01234590174838', null, '05898403', 478);
         
 -- EXIBINDO OS DADOS DA TABELA DE EMPRESA
 
@@ -137,10 +137,6 @@
 		(null, 1, 'Elena', 'Kalika', 'admin@elena.datacenter.', 'LeiteComMangaNaoFazMal', null),
 		(null, 2, 'Luíza', 'Venoza', 'admin@luiza.datacenter', 'SalonLine', null),
 		(null, 3, 'Kleber', 'Bambam', 'admin@bambam.datacenter', '#Kb0123', null);
-        
-	UPDATE Usuario SET fkUsuarioAdmin = null WHERE idUsuario = 1;
-	UPDATE Usuario SET fkUsuarioAdmin = null WHERE idUsuario = 2;
-	UPDATE Usuario SET fkUsuarioAdmin = null WHERE idUsuario = 3;
         
 -- INSERÇÃO DE USUÁRIOS NORMAIS NA TABELA DE USUÁRIO
 
@@ -357,4 +353,5 @@
 	SELECT * FROM Sensor
 		JOIN Setor ON Sensor.fkSetor = Setor.idSetor
 			JOIN dadosSensor ON dadosSensor.fkSensor = Sensor.idSensor;
+            
             

@@ -358,4 +358,24 @@
     background-color: #000;
 }
 
+.suporte{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
 
+.titulo-suporte h1{
+    font-family: 'Nunito Sans';
+    font-size: 3vw;
+    font-weight: 600;
+    color: #40E0D0;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.suporte iframe{
+    border: #40E0D0 solid 2px;
+    border-radius: 10px;
+    margin: 0 auto;
+}

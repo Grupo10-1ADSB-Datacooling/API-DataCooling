@@ -11,7 +11,7 @@ function exibirCadastroParte2() {
     nomeEmpresa = ipt_nome_empresa.value;
     
     if (nome == "" || sobrenome == "" || nomeEmpresa == "" ) {
-        alert("Por favor, preencher todos os campos!");
+        swal("ERRO!", "Por favor, preencher todos os campos!", "error");
     } else {
         sessionStorage.setItem('NOME', nome);
         sessionStorage.setItem('SOBRENOME', sobrenome)
@@ -39,7 +39,7 @@ function cadastrarUsuario(){
     token = ipt_token.value;
 
     if (email == "" || senha == "" || token == "" ) {
-        alert("Por favor, preencher todos os campos!");
+        swal("ERRO!", "Por favor, preencher todos os campos", "error");
     }else {
         nomeEmpresa = sessionStorage.NOME_EMPRESA;
 
@@ -65,7 +65,7 @@ function buscarEmpresa(token, nomeEmpresa){
                     finalizarCadastro(dadosEmpresa[0].fkEmpresa, dadosEmpresa[0].idUsuario);
                 });
             } else {
-                alert('Dados da empresa inválidos, tente novamente!');
+                swal("ERRO!", "Dados da empresa inválidos, tente novamente!", "error");
             }
         } else {
             throw ("Houve um erro ao tentar buscar a empresa!");
@@ -105,10 +105,10 @@ function finalizarCadastro(fkEmpresa, fkUsuarioAdmin) {
 
                 sessionStorage.clear();
 
-                alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
+                swal("Cadastro realizado com sucesso!", "Redirecionando para tela de Login...", "success");
 
                 setTimeout(() => {
-                    window.location = "login.html";
+                    window.location = "./login.html";
                 }, "2000")
 
                 limparFormulario();

@@ -4,7 +4,7 @@ function entrar() {
     var senhaVar = ipt_senha.value
 
     if (emailVar == "" || senhaVar == "") {
-        alert('Mensagem de erro para todos os campos em branco');
+        swal("ERRO!", "Mensagem de erro para todos os campos em branco", "error");
         finalizarAguardar();
         return false;
     } else {
@@ -64,5 +64,15 @@ function entrar() {
         })
 
         return false;
+    }
+}
+
+function mostrarOcultarSenha(){
+    var mostrar_senha = document.getElementById("ipt_senha")
+    
+    if(mostrar_senha.type == "password"){
+        mostrar_senha.type="text";
+    } else {
+        mostrar_senha.type="password";
     }
 }

@@ -37,7 +37,6 @@ function listarDataRegistro(idEmpresa, idSensor){
         JOIN Sensor ON dadosSensor.fkSensor = Sensor.idSensor
             JOIN Setor ON Sensor.fkSetor = Setor.idSetor
                 WHERE Setor.fkEmpresa = ${idEmpresa} AND Sensor.idSensor = ${idSensor}
-                    GROUP BY dataFormatada
                    ORDER BY dataFormatada DESC;`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

@@ -17,7 +17,7 @@ function exibirDados() {
         emailUsuario.innerHTML = email;
         nomeEmpresa.innerHTML = empresa;
 
-        if(id == fkAdmin){
+        if(fkAdmin == 'null'){
             document.getElementById('dadosResponsavelEmpresa').remove();
         } else {
             responsavelEmpresa.innerHTML = `${nomeResponsavel} ${sobrenomeResponsavel}`;

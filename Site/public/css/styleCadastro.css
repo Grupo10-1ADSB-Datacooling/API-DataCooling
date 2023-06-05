@@ -246,3 +246,15 @@ h1{
   .botao_voltar:active {
     transform: translate(5px ,5px);
   }
+    
+  .checkbox{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  .checkbox .font-checkbox{
+    padding-left: 10px;
+    font-size: 12px;
+    color: #37C1CA;
+  }

@@ -29,7 +29,7 @@ var mySqlConfig = {
     host: "localhost",
     database: "datacooling1",
     user: "root",
-    password: "",
+    password: "Caua39014646!",
 };
 
 function executar(instrucao) {

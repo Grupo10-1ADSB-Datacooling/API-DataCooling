@@ -39,7 +39,7 @@ function limparSessao() {
 
 function finalizarAguardar(texto) {
     if (texto) {
-        alert(texto);
+        swal(texto);
     }
 }
 

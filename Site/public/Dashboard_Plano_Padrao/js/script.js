@@ -148,7 +148,9 @@ function exibirCardSensor(resposta, idSensor) {
 }
 
 function obterDados(idSensor) {
-    fetch(`/medidas/tempo-real/${idSensor}`, { cache: 'no-store' }).then(function (response) {
+    var idUsuario = sessionStorage.ID;
+
+    fetch(`/medidas/tempo-real/${idSensor}/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (novoRegistro) {
 

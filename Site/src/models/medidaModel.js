@@ -30,7 +30,7 @@ function buscarUltimasMedidas(idSensor, dataRegistro, limite_linhas) {
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoReal(idSensor) {
+function buscarMedidasEmTempoReal(idSensor, idUsuario) {
 
     instrucaoSql = ''
 
@@ -43,12 +43,13 @@ function buscarMedidasEmTempoReal(idSensor) {
                     order by dataHora desc`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select Usuario.nome AS nomeUsuario, Usuario.sobrenome, email, statusSensor, temperatura, umidade, dataHora, DATE_FORMAT(dataHora,'%H:%i:%s') as momento_grafico, Setor.nome AS nomeSetor, fkSensor from Usuario
-        right join Setor on Setor.fkEmpresa = Usuario.fkEmpresa
-        right join Sensor on Sensor.fkSetor = Setor.idSetor
-            right join dadosSensor on dadosSensor.fkSensor = Sensor.idSensor
-                where fkSensor = ${idSensor} 
-                order by dataHora desc limit 1`;
+        instrucaoSql = `
+        select Usuario.idUsuario, Usuario.nome AS nomeUsuario, Usuario.sobrenome, email, statusSensor, temperatura, umidade, dataHora, DATE_FORMAT(dataHora,'%H:%i:%s') as momento_grafico, Setor.nome AS nomeSetor, fkSensor from Usuario
+            right join Setor on Setor.fkEmpresa = Usuario.fkEmpresa
+                right join Sensor on Sensor.fkSetor = Setor.idSetor
+                    right join dadosSensor on dadosSensor.fkSensor = Sensor.idSensor
+                    where fkSensor = ${idSensor} AND idUsuario = ${idUsuario}
+                    order by dataHora desc limit 1;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
