@@ -28,23 +28,6 @@ function obterDadosGraficos() {
                 </div>
             </div>
             </div>
-            <div class="donut">
-            <div class="donut-chart">
-                <div class="title">
-                    <h4> Mediana da Temperatura de Hoje</h4>
-                </div>
-                <div class="chart">
-                    <canvas class="chart-item" id="chartMediaTemperature"></canvas>
-                </div>
-            </div>
-            <div class="donut-chart">
-                <div class="title">
-                    <h4> Mediana da Umidade de Hoje</h4>
-                </div>
-                <div class="chart">
-                    <canvas class="chart-item" id="chartMediaHumidity"></canvas>
-                </div>
-            </div>
         </div>`;
     var idSensor = Number(select_sensor.value);
     var dataRegistro = select_data.value;

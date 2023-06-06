@@ -68,7 +68,7 @@ function gerarStringAleatoria() {
         if (resposta.ok) {
             mensagem.innerHTML = `<input id="a" value="${valorToken}" style="width: 38vh;" readonly class="ipt_token"> <div id="mensagem_copiar"></div>`
             btn_copiar.innerHTML = `<button onclick="copiar()" class="copy_bnt" readonly >Copiar</button>`
-            alert('Você possui 30 minutos para utilizar o token, após esse tempo ele será excluído!')
+            swal("TOKEN CRIADO COM SUCESSO!", "Você possui 30 minutos para utilizar o token, após esse tempo ele será excluído!", "success");
             
             setTimeout(excluirToken, 180 * 1000);
 
@@ -85,7 +85,7 @@ function gerarStringAleatoria() {
                         response.json().then(function (resposta) {
                             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                             resposta.reverse();
-                            alert(`Você já possui o token ${resposta[0].valor} ativo, aguarde o tempo de exclusão para criar outro!`);
+                            swal(`Você já possui um Token ativo!`, `Seu Token em atividade é o: ${resposta[0].valor}, aguarde o tempo de exclusão para criar outro!`, "error");
                         });
                     } else {
                         console.error('Nenhum dado encontrado ou erro na API');
