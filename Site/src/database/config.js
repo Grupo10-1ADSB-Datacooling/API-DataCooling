@@ -25,11 +25,19 @@ var sql = require('mssql');
 //     password: "Batata#1",
 // };
 
+// var mySqlConfig = {
+//     host: "localhost",
+//     database: "datacooling1",
+//     user: "root",
+//     password: "Caua39014646!",
+// };
+
+
 var mySqlConfig = {
     host: "localhost",
     database: "datacooling1",
     user: "root",
-    password: "Caua39014646!",
+    password: "",
 };
 
 function executar(instrucao) {

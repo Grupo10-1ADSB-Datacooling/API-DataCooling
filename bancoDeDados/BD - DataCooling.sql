@@ -1,39 +1,47 @@
 /* REGRA DE NEGÓCIO
 
-	* PLANO PARA EMPRESA:
+	* EMPRESA PARA TÉCNICO
     
-		UM PLANO PODE SER ADQUIRIDO POR MUITAS EMPRESAS;
-		UMA EMPRESA SÓ PODE ADQUIRIR UM PLANO;
+		UMA EMPRESA PODE RECEBER UMA VISITA DE MUITOS TÉCNICOS;
+        UM TÉCNICO PODE VISITAR VÁRIAS EMPRESAS;
+		À PARTIR DISSO CRIA-SE A TABELA VISITA.
         
-        RELAÇÃO 1:N
+        RELAÇÃO N:N.
+        
+	* EMPRESA PARA TOKEN
+    
+		UMA EMPRESA POSSUI SOMENTE UM TOKEN;
+        UM TOKEN SÓ PODE PERTENCER A UM USUÁRIO.
+        
+        RELAÇÃO 1:1
         
 	* EMPRESA PARA USUÁRIO:
     
 		UMA EMPRESA PODE TER MUITOS USUÁRIOS;
-		UM USUÁRIO SÓ PODE SER DE UMA EMPRESA;
+		UM USUÁRIO SÓ PODE SER DE UMA EMPRESA.
         
-        RELAÇÃO 1:N
+        RELAÇÃO 1:N.
       
 	* EMPRESA PARA SETOR
 	
 		UMA EMPRESA PODE POSSUI MUITOS SETORES;
-		UM SETOR SÓ PODE SER DE UMA EMPRESA;
+		UM SETOR SÓ PODE SER DE UMA EMPRESA.
         
-        RELAÇÃO 1:N
+        RELAÇÃO 1:N.
     
     * SETOR PARA SENSOR
     
 		UM SETOR/LOCAL PODE TER VÁRIOS SENSORES;
 		UM SENSOR SÓ PODE ESTAR EM UM SETOR/LOCAL;
         
-        RELAÇÃO 0:N
+        RELAÇÃO 0:N.
     
     * SENSOR PARA REGISTRO / DADOS_SENSOR
     
 		UM SENSOR PODE TER MUITOS REGISTROS;
 		UM REGISTRO SÓ PODE SER DE UM SENSOR;
         
-        RELAÇÃO 0:N
+        RELAÇÃO 0:N.
 
 */
 
@@ -45,30 +53,26 @@
 
 	USE DataCooling1;
     
--- TABELA DOS PLANOS
-
-	CREATE TABLE Plano (
-    idPlano INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(45),
-    qtdUsuario INT,
-    qtdSetores INT,
-    qtdSensores INT,
-    CONSTRAINT chkNome CHECK (nome IN ('Basic', 'Padrão', 'Premium'))
+-- TABELA DO TÉCNICO
+		
+	CREATE TABLE Tecnico (
+    idTecnico INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(45) NOT NULL,
+    sobrenome VARCHAR(45) NOT NULL,
+    cpf CHAR(11) NOT NULL
     );
+    
+-- INSERÇÃO DE REGISTROS NA TABELA DE EMPRESA
 
-drop table Plano;
-
--- INSERÇÃO DE REGISTROS NA TABELA PLANO
-
-	INSERT INTO Plano VALUES
-		(null, 'Basic', 2, 2, 2),
-		(null, 'Padrão', 4, 4, 4),
-		(null, 'Premium', 1000, 1000, 1000);
+	INSERT INTO Tecnico VALUES
+		(null, 'Jefferson', 'Dantas', '10230240342'),
+		(null, 'Rebecca', 'Barros', '89027467320'),
+		(null, 'Patrícia', 'Fernandez', '48117927942');
         
--- EXIBINDO OS DADOS DA TABELA DE PLANOS
+-- EXIBINDO OS DADOS DA TABELA TÉCNICO
 
-	SELECT * FROM Plano;
-
+	SELECT * FROM Tecnico;
+        
 -- TABELA DA EMPRESA
 
 	CREATE TABLE Empresa (
@@ -91,6 +95,34 @@ drop table Plano;
 
 	SELECT * FROM Empresa;
     
+-- TABELA DA VISITA (ASSOCIATIVA)
+
+	CREATE TABLE Visita (
+    idVisita INT AUTO_INCREMENT,
+    fkTecnico INT NOT NULL,
+    fkEmpresa INT NOT NULL,
+    dtVisita DATE NOT NULL,
+    tipo VARCHAR(45) NOT NULL,
+    CONSTRAINT fkTecnicoVisita FOREIGN KEY (fkTecnico) REFERENCES Tecnico(idTecnico),
+    CONSTRAINT fkEmpresaVisita FOREIGN KEY (fkEmpresa) REFERENCES Empresa(idEmpresa),
+    CONSTRAINT pkCompostaVisita PRIMARY KEY (idVisita, fkTecnico, fkEmpresa)
+    ) AUTO_INCREMENT = 1000;
+        
+-- INSERÇÃO DE REGISTROS NA TABELA DE VISITA
+
+	INSERT INTO Visita VALUES
+		(null, 2, 1, '2023-04-21', 'Instalação'),
+		(null, 1, 3, '2023-05-04', 'Instalação'),
+		(null, 3, 2, '2023-05-02', 'Instalação'),
+		(null, 2, 1, '2023-05-25', 'Manutenção'),
+		(null, 1, 1, '2023-05-29', 'Manutenção'),
+		(null, 1, 2, '2023-06-05', 'Manutenção'),
+		(null, 3, 3, '2023-06-06', 'Manutenção');
+    
+-- EXIBINDO OS DADOS DA TABELA DE EMPRESA
+
+	SELECT * FROM Visita;
+    
 -- TABELA DE TOKEN
 
 	CREATE TABLE Token (
@@ -101,14 +133,14 @@ drop table Plano;
         CONSTRAINT fkTokenEmpresa FOREIGN KEY (fkEmpresa) REFERENCES Empresa(idEmpresa),
         CONSTRAINT pkCompostaToken PRIMARY KEY (idToken, fkEmpresa),
         UNIQUE KEY (fkEmpresa)
-	)AUTO_INCREMENT = 10000;
+	)AUTO_INCREMENT = 1000;
     
 -- INSERÇÃO DE REGISTROS NA TABELA TOKEN
 
 	INSERT INTO Token VALUES
-		(null, 1, 'jfgo95ugi3u98htuh983y9fn949hv3', '2023-05-23 10:37:38'),
-		(null, 2, 'ibgtio894u8goneh984uoin09490k0', '2023-05-30 18:49:12'),
-		(null, 3, '3iuhguibiu4i839hngon83u8ngois2', '2023-05-27 19:12:53');
+		(null, 1, 'jfgo95ugi3u98htuh983y9fn949hv3', '2023-05-23 10:37:38', '2023-05-23 11:07:38'),
+		(null, 2, 'ibgtio894u8goneh984uoin09490k0', '2023-05-30 18:49:12', '2023-05-30 19:19:12'),
+		(null, 3, '3iuhguibiu4i839hngon83u8ngois2', '2023-05-27 19:12:53', '2023-05-27 19:42:53');
                 
 -- EXIBINDO OS REGISTROS DA TABELA TOKEN
 	
@@ -245,7 +277,7 @@ drop table Plano;
 		('2023-06-02 12:21:22', 110, null, null);
         
 	INSERT INTO dadosSensor VALUES
-		(now(), 110, 100, 100);
+		(now(), 107, 100, 100);
             
 -- EXIBINDO OS DADOS DA TABELA DE DADOS_SENSOR
 
@@ -253,12 +285,14 @@ drop table Plano;
 
 -- EXIBINDO OS DADOS DAS QUATRO TABELAS SEPARADAMENTE
 	
-		SELECT * FROM Plano;
+		SELECT * FROM Tecnico;
 
 		SELECT * FROM Empresa;
         
-        SELECT * FROM Token;
+		SELECT * FROM Visita;
         
+        SELECT * FROM Token;
+                
 		SELECT * FROM Usuario;
         
         SELECT * FROM Setor;
@@ -280,6 +314,12 @@ drop table Plano;
 	SELECT * FROM Sensor WHERE statusSensor = 'Inativo';
     
 	SELECT * FROM Sensor WHERE statusSensor = 'Manutenção';
+    
+-- EXIBINDO OS DADOS DO TÉCNICO, DA VISITA E DA RESPECTIVA EMPRESA
+
+	SELECT * FROM Tecnico
+		JOIN Visita ON Visita.fkTecnico = Tecnico.idTecnico
+			JOIN Empresa ON Visita.fkEmpresa = Empresa.idEmpresa;
 
 -- EXIBINDO A EMPRESA A QUAL O SENSOR PERTENCE
 
@@ -306,16 +346,6 @@ drop table Plano;
 
 	SELECT * FROM dadosSensor WHERE temperatura < 23 OR umidade <= 35;
     
--- EXIBINDO OS DADOS DAS EMPRESAS JUNTO COM SEUS RESPECTIVOS PLANOS
-
-	SELECT * FROM Empresa
-		JOIN Plano ON Empresa.fkPlano = Plano.idPlano;
-        
--- EXIBINDO O NOME DA EMPRESA E O NOME DO SEU PLANO 
-
-	SELECT Empresa.razaoSocial, Plano.nome AS nomePlano FROM Empresa
-		JOIN Plano ON Empresa.fkPlano = Plano.idPlano;
-
 -- EXIBINDO OS DADOS DAS EMPRESAS JUNTO COM SEUS RESPECTIVOS USUÁRIOS
 
 	SELECT * FROM Empresa 
@@ -332,11 +362,11 @@ drop table Plano;
 	SELECT * FROM Usuario AS Usuario
 		JOIN Usuario AS Administrador ON Usuario.fkUsuarioAdmin = Administrador.idUsuario;
             
--- EXIBINDO OS DADOS DOS USUÁRIOS JUNTO COM OS DADOS DA EMPRESA E OS DADOS DOS PLANOS
+-- EXIBINDO OS DADOS DAS EMPRESAS JUNTO COM SEUS USUÁRIOS E SEUS RESPECTIVOS USUÁRIOS ADMINSTRADORES
 
-	SELECT * FROM Usuario 
-		JOIN Empresa ON Usuario.fkEmpresa = Empresa.idEmpresa
-			JOIN Plano ON Empresa.fkPlano = Plano.idPlano;
+	SELECT * FROM Empresa 
+		JOIN Usuario AS User ON User.fkEmpresa = Empresa.idEmpresa
+			JOIN Usuario AS Admin ON User.fkUsuarioAdmin = Admin.idUsuario;
 
 -- EXIBINDO OS DADOS DOS SENSORES JUNTO COM SEUS RESPECTIVOS REGISTROS
 

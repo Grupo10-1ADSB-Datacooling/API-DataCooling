@@ -28,6 +28,7 @@ function exibirUsuarioCadastrado() {
 
 function exibirUsuario(resposta){
     var users = document.querySelector('.users');
+    users.innerHTML = "";
     console.log(resposta)
     for(var contadorUsuario = (resposta.length - 1); contadorUsuario >= 0; contadorUsuario--){
         users.innerHTML +=
@@ -40,6 +41,8 @@ function exibirUsuario(resposta){
             </span>
         </div>`;
     }
+
+    setTimeout(exibirUsuarioCadastrado, 2000);
 }
 
 function gerarStringAleatoria() {
@@ -70,7 +73,8 @@ function gerarStringAleatoria() {
             btn_copiar.innerHTML = `<button onclick="copiar()" class="copy_bnt" readonly >Copiar</button>`
             swal("TOKEN CRIADO COM SUCESSO!", "Você possui 30 minutos para utilizar o token, após esse tempo ele será excluído!", "success");
             
-            setTimeout(excluirToken, 180 * 1000);
+            console.log(resposta)
+            setTimeout(excluirToken, 60000);
 
         } else {
             if(resposta.status == 500){
@@ -86,6 +90,7 @@ function gerarStringAleatoria() {
                             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                             resposta.reverse();
                             swal(`Você já possui um Token ativo!`, `Seu Token em atividade é o: ${resposta[0].valor}, aguarde o tempo de exclusão para criar outro!`, "error");
+                            setTimeout(excluirToken, 10000)
                         });
                     } else {
                         console.error('Nenhum dado encontrado ou erro na API');
@@ -124,7 +129,7 @@ function excluirToken(){
     }).then(function (resposta) {
 
         if (resposta.ok) {
-            alert("Agora você já pode criar outro token!");
+            swal("Agora você já pode criar outro token!");
             mensagem.innerHTML = ""
             btn_copiar.innerHTML = "";
             mensagem_copiar.innerHTML = "";
